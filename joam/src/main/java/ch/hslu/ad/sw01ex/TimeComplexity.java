@@ -14,6 +14,13 @@ public class TimeComplexity {
     private final List<TCResult> resultList = new ArrayList<>();
 
     private record TCResult(int n, int methodCallCount) {
+        public float getCallCountIncreaseFactor(final TCResult prev) {
+            return (float) this.methodCallCount() / prev.methodCallCount();
+        }
+
+        public float getNIncreaseFactor(final TCResult prev) {
+            return (float) this.n() / prev.n();
+        }
     }
 
     private static Logger LOG = LoggerFactory.getLogger(TimeComplexity.class);
@@ -48,34 +55,44 @@ public class TimeComplexity {
         return myMethodCallCount;
     }
 
-    public void taskRunner() {
-        this.resetMethodCallCount();
-
-        for (int i = 1; i <= 512; i = i * 2) {
-            LOG.info("Taskrunner loop!");
-            LOG.info(String.format("ArrayListCount: %s", this.resultList.size()));
-            var callCount = this.task(i);
-            this.resultList.add(new TCResult(i, callCount));
+    /**
+     * Runs the "task" method multiple times and collects methodCall statistics.
+     *
+     * @param iterations specify how many times task() should be run, doubling n every time, starting from 1
+     */
+    public void taskRunner(final int iterations) {
+        int n = 1;
+        for (int i = 0; i < iterations; i++) {
+            this.resultList.add(new TCResult(n, this.task(n)));
+            n = n * 2;
         }
     }
 
-    public void printResults() {
+    public void printTable() {
 
         AsciiTable table = new AsciiTable();
         table.setMaxColumnWidth(50);
 
+        table.getColumns().add(new AsciiTable.Column("iteration"));
         table.getColumns().add(new AsciiTable.Column("n-param"));
         table.getColumns().add(new AsciiTable.Column("methodCallCount"));
-        table.getColumns().add(new AsciiTable.Column("increase factor"));
+        table.getColumns().add(new AsciiTable.Column("n-increaseFactor"));
+        table.getColumns().add(new AsciiTable.Column("methodCallIncreaseFactor"));
 
         for (int i = 0; i < this.resultList.size(); i++) {
             AsciiTable.Row row = new AsciiTable.Row();
             table.getData().add(row);
+            row.getValues().add(String.valueOf(i + 1));
             row.getValues().add(String.valueOf(this.resultList.get(i).n()));
             row.getValues().add(String.valueOf(this.resultList.get(i).methodCallCount()));
 
             if (i > 0) {
-                row.getValues().add(String.valueOf(this.resultList.get(i).methodCallCount() / this.resultList.get(i - 1).methodCallCount()));
+                row.getValues().add(String.valueOf(
+                        this.resultList.get(i).getNIncreaseFactor(this.resultList.get(i - 1)))
+                );
+                row.getValues().add(String.valueOf(
+                        this.resultList.get(i).getCallCountIncreaseFactor(this.resultList.get(i - 1)))
+                );
             }
         }
 

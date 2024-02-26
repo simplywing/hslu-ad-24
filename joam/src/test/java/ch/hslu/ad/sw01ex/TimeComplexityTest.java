@@ -2,8 +2,6 @@ package ch.hslu.ad.sw01ex;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TimeComplexityTest {
     @Test
     void testTask() {
@@ -28,7 +26,7 @@ class TimeComplexityTest {
     @Test
     void testTestRunner() {
         var tc = new TimeComplexity();
-        tc.taskRunner();
-        tc.printResults();
+        tc.taskRunner(15);
+        tc.printTable();
     }
 }
