@@ -25,7 +25,7 @@ class TimeComplexityTest {
     @Test
     void testTestRunner() {
         var tc = new TimeComplexity();
-        tc.taskRunner(15);
+        tc.taskRunner(19);
         tc.printTable();
     }
 }

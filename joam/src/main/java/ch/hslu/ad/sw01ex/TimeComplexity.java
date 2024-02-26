@@ -12,10 +12,10 @@ public class TimeComplexity {
     private static Logger LOG = LoggerFactory.getLogger(TimeComplexity.class);
     private final List<TimeComplexityResult> resultList = new ArrayList<>();
     private int methodSleepDurationMs = 1;
-    private int methodCallCount = 0;
+    private long methodCallCount = 0;
     private boolean sleepEnabled = false;
 
-    private int getMethodCallCount() {
+    private long getMethodCallCount() {
         return methodCallCount;
     }
 
@@ -23,7 +23,7 @@ public class TimeComplexity {
         this.methodCallCount = 0;
     }
 
-    public int task(final int n) {
+    public long task(final int n) {
         this.resetMethodCallCount();
 
         task1();
