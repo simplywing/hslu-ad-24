@@ -9,23 +9,13 @@ import java.util.List;
 
 public class TimeComplexity {
 
-    private int methodCallCount = 0;
-
-    private final List<TCResult> resultList = new ArrayList<>();
-
-    private record TCResult(int n, int methodCallCount) {
-        public float getCallCountIncreaseFactor(final TCResult prev) {
-            return (float) this.methodCallCount() / prev.methodCallCount();
-        }
-
-        public float getNIncreaseFactor(final TCResult prev) {
-            return (float) this.n() / prev.n();
-        }
-    }
-
     private static Logger LOG = LoggerFactory.getLogger(TimeComplexity.class);
+    private final List<TimeComplexityResult> resultList = new ArrayList<>();
+    private int methodSleepDurationMs = 1;
+    private int methodCallCount = 0;
+    private boolean sleepEnabled = false;
 
-    public int getMethodCallCount() {
+    private int getMethodCallCount() {
         return methodCallCount;
     }
 
@@ -56,16 +46,21 @@ public class TimeComplexity {
     }
 
     /**
-     * Runs the "task" method multiple times and collects methodCall statistics.
+     * Runs the "task" method multiple times and collects statistics.
      *
      * @param iterations specify how many times task() should be run, doubling n every time, starting from 1
      */
     public void taskRunner(final int iterations) {
         int n = 1;
         for (int i = 0; i < iterations; i++) {
-            this.resultList.add(new TCResult(n, this.task(n)));
+            this.resultList.add(new TimeComplexityResult(n, this.task(n)));
             n = n * 2;
         }
+    }
+
+    public void taskRunner(final int iterations, final boolean sleepEnabled) {
+        this.sleepEnabled = sleepEnabled;
+        this.taskRunner(iterations);
     }
 
     public void printTable() {
@@ -84,14 +79,14 @@ public class TimeComplexity {
             table.getData().add(row);
             row.getValues().add(String.valueOf(i + 1));
             row.getValues().add(String.valueOf(this.resultList.get(i).n()));
-            row.getValues().add(String.valueOf(this.resultList.get(i).methodCallCount()));
+            row.getValues().add(String.valueOf(this.resultList.get(i).bigO()));
 
             if (i > 0) {
                 row.getValues().add(String.valueOf(
                         this.resultList.get(i).getNIncreaseFactor(this.resultList.get(i - 1)))
                 );
                 row.getValues().add(String.valueOf(
-                        this.resultList.get(i).getCallCountIncreaseFactor(this.resultList.get(i - 1)))
+                        this.resultList.get(i).getOIncreaseFactor(this.resultList.get(i - 1)))
                 );
             }
         }
@@ -101,6 +96,13 @@ public class TimeComplexity {
     }
 
     private void task1() {
+        if (this.sleepEnabled) {
+            try {
+                Thread.sleep(this.methodSleepDurationMs);
+            } catch (InterruptedException e) {
+                LOG.error("Thread sleep failed: " + e.getMessage());
+            }
+        }
         methodCallCount++;
     }
 
@@ -110,5 +112,15 @@ public class TimeComplexity {
 
     private void task3() {
         task1();
+    }
+
+    private record TimeComplexityResult(int n, long bigO) {
+        public float getOIncreaseFactor(final TimeComplexityResult prev) {
+            return (float) this.bigO() / prev.bigO();
+        }
+
+        public float getNIncreaseFactor(final TimeComplexityResult prev) {
+            return (float) this.n() / prev.n();
+        }
     }
 }

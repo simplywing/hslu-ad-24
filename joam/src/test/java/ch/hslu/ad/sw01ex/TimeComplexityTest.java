@@ -6,8 +6,7 @@ class TimeComplexityTest {
     @Test
     void testTask() {
         var t = new TimeComplexity();
-        t.task(20);
-        System.out.println(t.getMethodCallCount());
+        System.out.println(t.task(20));
     }
 
     @Test
