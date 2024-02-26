@@ -38,7 +38,7 @@ public class AsciiTable {
 
         // values
         writeValues(columns, data, sb);
-        
+
         System.out.println(sb.toString());
     }
 
@@ -51,7 +51,9 @@ public class AsciiTable {
 
     private void writeSeparator(final List<Column> columns, final StringBuilder sb) {
         for (Column column : columns) {
-            sb.append(String.format("%-" + (column.width + 1) + "s", "").replace(' ', '-'));
+            sb.append(" ");
+            sb.append(String.format(" %-" + (column.width - 2) + "s", "").replace(' ', '-'));
+            sb.append(" ");
         }
         sb.append("\n");
     }
