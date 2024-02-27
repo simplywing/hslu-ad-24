@@ -48,7 +48,7 @@ class MyListTest {
         list.add(new Point(3, 3));
         list.add(new Point(4, 4));
 
-        
+
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -76,9 +76,13 @@ class MyListTest {
         list.add(new Point(2, 2));
         list.add(new Point(3, 3));
 
+        int elemCount = 0;
         for (Point p : list) {
             System.out.println(p);
+            elemCount++;
         }
+
+        assertEquals(3, elemCount);
     }
 
 }
