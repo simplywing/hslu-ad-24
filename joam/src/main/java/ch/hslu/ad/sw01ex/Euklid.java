@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Euklid {
-    private static Logger LOG = LoggerFactory.getLogger(Euklid.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Euklid.class);
 
     public static int ggtIterativ1(int a, int b) {
         while (a != b) {
