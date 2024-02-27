@@ -21,11 +21,14 @@ public class Growth {
     }
 
     public static long powerN(int base, int exp) {
-        if (exp == 0) return 1;
-        long res = base;
-        while (exp > 1) {
-            res *= base;
-            exp--;
+        long res = 1;
+        long square = base;
+        while (exp > 0) {
+            if (exp % 2 == 1) {
+                res *= square;
+            }
+            square = square * square;
+            exp /= 2;
         }
         return res;
     }
