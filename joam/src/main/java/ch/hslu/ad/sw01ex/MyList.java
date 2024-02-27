@@ -115,7 +115,7 @@ public class MyList<T> implements Iterable<T> {
 
     private static class MyListElem<T> {
 
-        public T content = null;
+        public T content;
         private MyListElem<T> prev = null;
         private MyListElem<T> next = null;
 
@@ -150,7 +150,7 @@ public class MyList<T> implements Iterable<T> {
 
     private static class MyListIterator<T> implements Iterator<T> {
 
-        private MyListElem<T> elem = null;
+        private MyListElem<T> elem;
 
         public MyListIterator(MyListElem<T> head) {
             this.elem = head;
