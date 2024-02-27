@@ -8,12 +8,26 @@ public class Growth {
         return (double) (Math.log((double) N) / Math.log(2));
     }
 
+    public static double log10(long N) {
+        return (double) (Math.log((double) N) / Math.log(10));
+    }
+
     public static long factorial(long N) {
         if (N == 0) {
             return 1;
         } else {
             return (N * factorial(N - 1));
         }
+    }
+
+    public static long powerN(int base, int exp) {
+        if (exp == 0) return 1;
+        long res = base;
+        while (exp > 1) {
+            res *= base;
+            exp--;
+        }
+        return res;
     }
 
     public static void printGrowthTable() {
@@ -34,14 +48,14 @@ public class Growth {
         for (int n : ns) {
             AsciiTable.Row row = new AsciiTable.Row();
             table.getData().add(row);
-            row.getValues().add(String.valueOf(Math.log(n)));
+            row.getValues().add(String.valueOf(log10(n)));
             row.getValues().add(String.valueOf(log2(n)));
             row.getValues().add(String.valueOf(n));
             row.getValues().add(String.valueOf(n * Math.log(n)));
             row.getValues().add(String.valueOf(n * n));
             row.getValues().add(String.valueOf(n * n * n));
-            row.getValues().add(String.valueOf(Math.pow(2, n)));
-            row.getValues().add(String.valueOf(Math.pow(3, n)));
+            row.getValues().add(String.valueOf(powerN(2, n)));
+            row.getValues().add(String.valueOf(powerN(3, n)));
             row.getValues().add(String.valueOf(factorial(n)));
         }
 
