@@ -64,7 +64,7 @@ public class MyList<T> implements Iterable<T> {
         int cacheIndex = index;
 
         MyListElem<T> result;
-        if (index > this.size() / 2) { //index is in the first half, start from head
+        if (index < this.size() / 2) { //index is in the first half, start from head
             result = this.getHead();
             while (index > 0) {
                 result = result.getNext();
