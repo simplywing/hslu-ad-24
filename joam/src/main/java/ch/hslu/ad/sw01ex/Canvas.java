@@ -10,8 +10,8 @@ public final class Canvas {
     private final int width = 11;
     private final int height = 10;
     private final int sleepDurationMs = 600;
-    private char[][] state = new char[this.height][this.width];
-    private int methodCallCount = 0;
+    private final char[][] state = new char[this.height][this.width];
+    private int colorAreaCallCount = 0;
     private int setPixelCallCount = 0;
     private CanvasIndex activePixel;
 
@@ -36,8 +36,8 @@ public final class Canvas {
         return setPixelCallCount;
     }
 
-    public int getMethodCallCount() {
-        return methodCallCount;
+    public int getColorAreaCallCount() {
+        return colorAreaCallCount;
     }
 
     private void loadInitialState(String initialState) {
@@ -86,7 +86,7 @@ public final class Canvas {
                           final char fillChar,
                           final char borderChar) {
 
-        this.methodCallCount++;
+        this.colorAreaCallCount++;
         this.activatePixel(x, y);
         this.printStateAndSleep();
 
