@@ -72,7 +72,7 @@ public final class Canvas {
         }
     }
 
-    public void printStateAndSleep() {
+    public void printAnimationFrame() {
         this.printState();
         this.sleep();
     }
@@ -88,32 +88,36 @@ public final class Canvas {
 
         this.colorAreaCallCount++;
         this.activatePixel(x, y);
-        this.printStateAndSleep();
 
         char actualChar = getPixel(x, y);
         if ((actualChar != borderChar) && (actualChar != fillChar)) {
             setPixel(x, y, fillChar);
-            colorArea(x + 1, y, fillChar, borderChar);
-
+            // deactivate and reactivate pixel for blink-effect when pixel was set
+            this.deactivatePixel();
             this.activatePixel(x, y);
-            this.printStateAndSleep();
+
+            colorArea(x + 1, y, fillChar, borderChar);
+            this.activatePixel(x, y);
 
             colorArea(x, y + 1, fillChar, borderChar);
-
             this.activatePixel(x, y);
-            this.printStateAndSleep();
 
             colorArea(x - 1, y, fillChar, borderChar);
-
             this.activatePixel(x, y);
-            this.printStateAndSleep();
 
             colorArea(x, y - 1, fillChar, borderChar);
+            this.activatePixel(x, y);
         }
     }
 
     private void activatePixel(final int x, final int y) {
         this.activePixel = translateCoordinates(x, y);
+        this.printAnimationFrame();
+    }
+
+    private void deactivatePixel() {
+        this.activePixel = null;
+        this.printAnimationFrame();
     }
 
     public void setPixel(final int x, final int y, final char value) {

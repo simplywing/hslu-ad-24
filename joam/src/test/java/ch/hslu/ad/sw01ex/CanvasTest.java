@@ -9,7 +9,7 @@ class CanvasTest {
         var cvs = new Canvas();
         cvs.colorArea(4, 3, '░', '▓');
 
-        System.out.println(String.format("Method calls: %s", cvs.getColorAreaCallCount()));
+        System.out.println(String.format("colorArea() Method calls: %s", cvs.getColorAreaCallCount()));
         System.out.println(String.format("setPixel() Method calls: %s", cvs.getSetPixelCallCount()));
     }
 }
