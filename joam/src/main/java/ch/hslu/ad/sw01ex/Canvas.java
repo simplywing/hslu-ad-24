@@ -91,7 +91,7 @@ public final class Canvas {
 
         char actualChar = getPixel(x, y);
         if ((actualChar != borderChar) && (actualChar != fillChar)) {
-            setPixel(x, y, fillChar);
+            this.setPixel(x, y, fillChar);
             // deactivate and reactivate pixel for blink-effect when pixel was set
             this.deactivatePixel();
             this.activatePixel(x, y);
