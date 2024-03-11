@@ -54,7 +54,7 @@ public class Growth {
             row.getValues().add(String.valueOf(log10(n)));
             row.getValues().add(String.valueOf(log2(n)));
             row.getValues().add(String.valueOf(n));
-            row.getValues().add(String.valueOf(n * Math.log(n)));
+            row.getValues().add(String.valueOf(n * log10(n)));
             row.getValues().add(String.valueOf(n * n));
             row.getValues().add(String.valueOf(n * n * n));
             row.getValues().add(String.valueOf(powerN(2, n)));

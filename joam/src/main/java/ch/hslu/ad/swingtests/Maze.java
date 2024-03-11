@@ -1,11 +1,13 @@
-package ch.hslu.ad.sw01ex;
+package ch.hslu.ad.swingtests;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class Canvas {
+import java.awt.*;
 
-    private static final Logger LOG = LoggerFactory.getLogger(Canvas.class);
+public final class Maze {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Maze.class);
     private final char activePixelMarker = '▒';
     private final int width = 11;
     private final int height = 10;
@@ -15,7 +17,9 @@ public final class Canvas {
     private int setPixelCallCount = 0;
     private CanvasIndex activePixel;
 
-    Canvas() {
+    private Graphics2D gContext;
+
+    Maze(Graphics2D context) {
         String initialState = """
                 ▓▓▓▓▓▓▓▓▓▓▓
                 ▓       ▓▓▓
@@ -30,6 +34,7 @@ public final class Canvas {
                 """;
 
         loadInitialState(initialState);
+        this.gContext = context;
     }
 
     public int getSetPixelCallCount() {
@@ -63,8 +68,11 @@ public final class Canvas {
                     System.out.print(this.activePixelMarker);
                     System.out.print(this.activePixelMarker);
                 } else {
-                    System.out.print(this.state[j][i]);
-                    System.out.print(this.state[j][i]);
+                    char s = this.state[j][i];
+                    if (s == '▓') {
+                        gContext.setColor(Color.BLACK);
+                        gContext.drawRect((i + 1) * 50, (j + 1) * 50, 50, 50);
+                    }
                 }
             }
             System.out.println();
