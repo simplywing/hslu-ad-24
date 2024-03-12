@@ -136,11 +136,31 @@ public final class BinTreeNode<T extends Comparable<T>> {
         this.right = right;
     }
 
+    private String indentedToString(BinTreeNode<T> node, String indent, NodeSide nodeSide) {
+        if (node == null) {
+            return "";
+        }
+        return this.indentedToString(node.getRight(), indent + "    ", NodeSide.Right)
+                + indent + nodeSide.getIndicator() + "══" + " " + node.getData() + "\n"
+                + this.indentedToString(node.getLeft(), indent + "    ", NodeSide.Left);
+    }
+
     @Override
     public String toString() {
-        return "BinTreeNode{" +
-                "left=" + left +
-                ", right=" + right +
-                '}';
+        return indentedToString(this, "", NodeSide.Root);
+    }
+
+    private enum NodeSide {
+        Left("╚"), Right("╔"), Root("");
+
+        private final String indicator;
+
+        NodeSide(String nsi) {
+            this.indicator = nsi;
+        }
+
+        public String getIndicator() {
+            return this.indicator;
+        }
     }
 }
