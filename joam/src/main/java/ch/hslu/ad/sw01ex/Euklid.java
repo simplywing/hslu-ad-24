@@ -3,7 +3,7 @@ package ch.hslu.ad.sw01ex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Euklid {
+public final class Euklid {
     private static final Logger LOG = LoggerFactory.getLogger(Euklid.class);
 
     public static int ggtIterativ1(int a, int b) {

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeComplexity {
+public final class TimeComplexity {
 
     private static Logger LOG = LoggerFactory.getLogger(TimeComplexity.class);
     private final List<TimeComplexityResult> resultList = new ArrayList<>();

@@ -2,7 +2,7 @@ package ch.hslu.ad.sw01ex;
 
 import ch.hslu.ad.helper.AsciiTable;
 
-public class Growth {
+public final class Growth {
 
     public static double log2(long N) {
         return (double) (Math.log((double) N) / Math.log(2));

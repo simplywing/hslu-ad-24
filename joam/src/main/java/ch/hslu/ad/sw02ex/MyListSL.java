@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class MyListSL<T> implements Iterable<T> {
+public final class MyListSL<T> implements Iterable<T> {
 
     private int size = 0;
 
@@ -51,6 +51,12 @@ public class MyListSL<T> implements Iterable<T> {
         this.size++;
     }
 
+    /**
+     * Removes the Element obj from the list by iterating through the List and finding a match.
+     *
+     * @param obj
+     * @return
+     */
     public boolean remove(T obj) {
         Node<T> prevNode = null;
         Node<T> currentNode = this.head;

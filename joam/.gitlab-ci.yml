@@ -1,0 +1,108 @@
+#
+# Copyright 2024 Roland Gisler, HSLU Informatik, Switzerland
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+include:
+    - template: Jobs/SAST.gitlab-ci.yml
+    - template: Security/Dependency-Scanning.gitlab-ci.yml
+    - template: Security/SAST-IaC.gitlab-ci.yml
+    - template: Security/Secret-Detection.gitlab-ci.yml
+
+default:
+    image: maven:3.9.6-eclipse-temurin-21
+
+variables:
+    SAST_EXCLUDED_PATHS: target/apidocs,target/site
+    MAVEN_CLI_OPTS: "-s .mvn/settings.xml --batch-mode"
+    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+    paths:
+        - .m2/repository/
+        - target/
+
+stages:
+    - build
+    - quality
+    - test
+    - deploy
+
+build:
+    stage: build
+    tags: 
+        - hslu
+    script:
+        - mvn $MAVEN_CLI_OPTS clean install $MAVEN_OPTS
+        - java -jar ./config/jacocoreader-0.0.1.jar ./target/site/jacoco/index.html
+    coverage: '/Total.*?([0-9]{1,3})%/'
+    artifacts:
+        paths:
+            - target/site/jacoco/jacoco.xml
+            - target/*.jar
+        reports:
+            junit:
+                - target/surefire-reports/TEST-*.xml
+                - target/failsafe-reports/TEST-*.xml
+
+coverage:
+    stage: quality
+    image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.9
+    script:
+        - python /opt/cover2cover.py target/site/jacoco/jacoco.xml $CI_PROJECT_DIR/src/main/java/ > target/site/cobertura.xml
+    artifacts:
+        reports:
+            coverage_report:
+                coverage_format: cobertura
+                path: target/site/cobertura.xml
+
+site:
+    stage: quality
+    script:
+        - mvn $MAVEN_CLI_OPTS site $MAVEN_OPTS
+    artifacts:
+        paths:
+            - target/site/
+            - target/generated-docs
+
+depcheck:
+    stage: test
+    script:
+        - mvn $MAVEN_CLI_OPTS org.owasp:dependency-check-maven:check $MAVEN_OPTS
+    artifacts:
+        paths:
+            - target/dependency-check-report.html
+
+package-deploy:
+    stage: deploy
+    needs:
+        - build
+    tags: 
+        - hslu
+    script:
+        - mvn $MAVEN_CLI_OPTS deploy $MAVEN_OPTS -DskiptTests -DskipITs
+    artifacts:
+        paths:
+            - target/*.jar
+
+pages:
+    stage: deploy
+    needs:
+        - site
+    script:
+        - mvn $MAVEN_CLI_OPTS site:stage $MAVEN_OPTS
+        - mv target/staging public
+        - mv target/generated-docs public/asciidoc
+    artifacts:
+        paths:
+            - public

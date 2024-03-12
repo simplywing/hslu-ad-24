@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T>
  */
-public class MyList<T> implements Iterable<T> {
+public final class MyList<T> implements Iterable<T> {
     private MyListElem<T> head = null;
     private MyListElem<T> tail = null;
     private int size = 0;
