@@ -7,7 +7,6 @@ public final class BinTree<T extends Comparable<T>> {
     private BinTreeNode<T> root = null;
 
     BinTree() {
-
     }
 
     public BinTreeNode<T> getRoot() {
