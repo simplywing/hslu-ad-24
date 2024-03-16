@@ -13,8 +13,8 @@ public final class BinTreeNode<T extends Comparable<T>> {
     public BinTreeNode(T data, BinTreeNode<T> parent, BinTreeNode<T> left, BinTreeNode<T> right) {
         this.setData(data);
         this.setParent(parent);
-        this.setLeft(left);
-        this.setRight(right);
+        this.set(left, NodeSide.Left);
+        this.set(right, NodeSide.Right);
     }
 
     public BinTreeNode(T data, BinTreeNode<T> parent) {
@@ -32,12 +32,12 @@ public final class BinTreeNode<T extends Comparable<T>> {
         this.parent = parent;
     }
 
-    private boolean hasLeftChild() {
-        return null != this.left;
-    }
-
-    private boolean hasRightChild() {
-        return null != this.right;
+    private boolean hasChild(NodeSide side) {
+        return switch (side) {
+            case Right -> null != this.right;
+            case Left -> null != this.left;
+            case null, default -> throw new IllegalArgumentException("hasChild can only be checked left and right.");
+        };
     }
 
     private boolean hasNoData() {
@@ -45,31 +45,31 @@ public final class BinTreeNode<T extends Comparable<T>> {
     }
 
     public void traverseInOrder() {
-        if (this.hasLeftChild()) {
-            this.getLeft().traverseInOrder();
+        if (this.hasChild(NodeSide.Left)) {
+            this.getNode(NodeSide.Left).traverseInOrder();
         }
         LOG.info(String.valueOf(this.data));
-        if (this.hasRightChild()) {
-            this.getRight().traverseInOrder();
+        if (this.hasChild(NodeSide.Right)) {
+            this.getNode(NodeSide.Right).traverseInOrder();
         }
     }
 
     public void traversePreOrder() {
         LOG.info(String.valueOf(this.data));
-        if (this.hasLeftChild()) {
-            this.getLeft().traversePreOrder();
+        if (this.hasChild(NodeSide.Left)) {
+            this.getNode(NodeSide.Left).traversePreOrder();
         }
-        if (this.hasRightChild()) {
-            this.getRight().traversePreOrder();
+        if (this.hasChild(NodeSide.Right)) {
+            this.getNode(NodeSide.Right).traversePreOrder();
         }
     }
 
     public void traversePostOrder() {
-        if (this.hasLeftChild()) {
-            this.getLeft().traversePostOrder();
+        if (this.hasChild(NodeSide.Left)) {
+            this.getNode(NodeSide.Left).traversePostOrder();
         }
-        if (this.hasRightChild()) {
-            this.getRight().traversePostOrder();
+        if (this.hasChild(NodeSide.Right)) {
+            this.getNode(NodeSide.Right).traversePostOrder();
         }
         LOG.info(String.valueOf(this.data));
     }
@@ -82,30 +82,29 @@ public final class BinTreeNode<T extends Comparable<T>> {
         if (this.hasNoData()) {
             this.setData(data);
         } else if (this.getData().compareTo(data) > 0) {
-            this.addLeft(data);
+            this.addNode(data, NodeSide.Left);
         } else {
-            this.addRight(data);
+            this.addNode(data, NodeSide.Right);
         }
     }
 
-    private void addLeft(T data) {
-        if (this.hasLeftChild()) {
+    private void addNode(T data, NodeSide side) {
+        if (this.hasChild(side)) {
             // delegate Insertion to next Node
-            this.getLeft().add(data);
+            this.getNode(side).add(data);
         } else {
             // node does not exist, create new and add Data
-            this.setLeft(new BinTreeNode<>(data, this));
+            this.set(new BinTreeNode<>(data, this), side);
         }
     }
 
-    private void addRight(T data) {
-        if (this.hasRightChild()) {
-            // delegate Insertion to next Node
-            this.getRight().add(data);
-        } else {
-            // node does not exist, create new and add Data
-            this.setRight(new BinTreeNode<>(data, this));
-        }
+    private BinTreeNode<T> getNode(NodeSide side) {
+        return switch (side) {
+            case Left -> this.left;
+            case Right -> this.right;
+            case Root -> throw new IllegalArgumentException("Node of side 'Root' cannot be returned");
+            case null -> throw new IllegalArgumentException("NodeSide cannot be null");
+        };
     }
 
     private boolean hasParent() {
@@ -120,29 +119,20 @@ public final class BinTreeNode<T extends Comparable<T>> {
         this.data = data;
     }
 
-    private BinTreeNode<T> getLeft() {
-        return left;
-    }
-
-    private void setLeft(BinTreeNode<T> left) {
-        this.left = left;
-    }
-
-    private BinTreeNode<T> getRight() {
-        return right;
-    }
-
-    private void setRight(BinTreeNode<T> right) {
-        this.right = right;
+    private void set(BinTreeNode<T> node, NodeSide side) {
+        switch (side) {
+            case Left -> this.left = node;
+            case Right -> this.right = node;
+        }
     }
 
     private String indentedToString(BinTreeNode<T> node, String indent, NodeSide nodeSide) {
         if (node == null) {
             return "";
         }
-        return this.indentedToString(node.getRight(), indent + "    ", NodeSide.Right)
+        return this.indentedToString(node.getNode(NodeSide.Right), indent + "    ", NodeSide.Right)
                 + indent + nodeSide.getIndicator() + "══" + " " + node.getData() + "\n"
-                + this.indentedToString(node.getLeft(), indent + "    ", NodeSide.Left);
+                + this.indentedToString(node.getNode(NodeSide.Left), indent + "    ", NodeSide.Left);
     }
 
     @Override
