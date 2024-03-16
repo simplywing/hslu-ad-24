@@ -120,19 +120,19 @@ public final class BinTreeNode<T extends Comparable<T>> {
         this.data = data;
     }
 
-    public BinTreeNode<T> getLeft() {
+    private BinTreeNode<T> getLeft() {
         return left;
     }
 
-    public void setLeft(BinTreeNode<T> left) {
+    private void setLeft(BinTreeNode<T> left) {
         this.left = left;
     }
 
-    public BinTreeNode<T> getRight() {
+    private BinTreeNode<T> getRight() {
         return right;
     }
 
-    public void setRight(BinTreeNode<T> right) {
+    private void setRight(BinTreeNode<T> right) {
         this.right = right;
     }
 
