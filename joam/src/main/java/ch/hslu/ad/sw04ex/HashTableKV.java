@@ -9,6 +9,7 @@ public final class HashTableKV<K, V> implements IHashTableKV<K, V> {
 
     private int size = 0;
 
+
     @SuppressWarnings("unchecked")
     HashTableKV(int size) {
         this.table = (List<HashTableElem<K, V>>[]) new LinkedList[size];
