@@ -15,6 +15,8 @@
  */
 package ch.hslu.ad.sw05ex.balls;
 
+import java.awt.*;
+
 /**
  * Demonstration von Bällen.
  */
@@ -26,14 +28,14 @@ public class DemoBallsMT {
      * @param args not used.
      */
     public static void main(final String[] args) {
-        final Canvas cvs = Canvas.getCanvas();
+        final Canvas cvs = Canvas.initCanvas("Ball Demo", 800, 500, Color.black);
         final String[] color = {"red", "black", "blue", "yellow", "green", "magenta"};
         final int[] size = {10, 12, 14, 16, 18};
-        final int ballCount = 42;
+        final int ballCount = 100;
 
-        final boolean useVirtualThreads = false;
+        final boolean useVirtualThreads = true;
 
-        for (int i = 0; i < ballCount; i++) {
+        for (int i = 0; i <= ballCount; i++) {
             Ball myBall = new Ball(
                     size[i % size.length],
                     (int) (cvs.getWidth() * Math.random()),

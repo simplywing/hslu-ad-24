@@ -67,14 +67,29 @@ public final class Canvas {
     }
 
     /**
+     * Factory method to initialize the Canvas singleton Object.
+     * Must be called before using getCanvas();
+     */
+    public static Canvas initCanvas(final String title, final int width, final int height, final Color color) {
+        synchronized (Canvas.class) {
+            if (canvasSingleton == null) {
+                canvasSingleton = new Canvas(title, width, height, color);
+            } else {
+                throw new IllegalStateException("Canvas can only be initialized once.");
+            }
+        }
+        canvasSingleton.setVisible(true);
+        return canvasSingleton;
+    }
+
+    /**
      * Factory method to get the canvas singleton object.
      *
      * @return singleton Canvas object.
      */
-    public static synchronized Canvas getCanvas() {
+    public static Canvas getCanvas() {
         if (canvasSingleton == null) {
-            canvasSingleton = new Canvas("Ball Demo", 800, 500,
-                    Color.black);
+            throw new IllegalStateException("Canvas must be initialized first. Use initCanvas to initialize.");
         }
         canvasSingleton.setVisible(true);
         return canvasSingleton;
