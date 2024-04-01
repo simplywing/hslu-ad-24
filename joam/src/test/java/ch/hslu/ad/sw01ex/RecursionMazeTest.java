@@ -3,12 +3,12 @@ package ch.hslu.ad.sw01ex;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class CanvasTest {
+class RecursionMazeTest {
 
     @Test
     @Disabled
     void testPaintBucket() {
-        var cvs = new Canvas();
+        var cvs = new RecursionMaze();
         cvs.colorArea(4, 3, '░', '▓');
 
         System.out.println(String.format("colorArea() Method calls: %s", cvs.getColorAreaCallCount()));

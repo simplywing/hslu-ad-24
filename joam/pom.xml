@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.hslu</groupId>
@@ -54,8 +55,11 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://${scm.developer.uid}@gitlab.switch.ch/hslu/${scm.group.name}/${project.artifactId}.git</connection>
-        <developerConnection>scm:git:ssh://git@gitlab.switch.ch/${scm.group.name}/${project.artifactId}.git</developerConnection>
+        <connection>
+            scm:git:https://${scm.developer.uid}@gitlab.switch.ch/hslu/${scm.group.name}/${project.artifactId}.git
+        </connection>
+        <developerConnection>scm:git:ssh://git@gitlab.switch.ch/${scm.group.name}/${project.artifactId}.git
+        </developerConnection>
         <url>https://gitlab.switch.ch/hslu-i1/${scm.group.name}/${project.artifactId}/tree/develop</url>
         <tag>HEAD</tag>
     </scm>
@@ -259,6 +263,16 @@
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>20.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>20.0.1</version>
         </dependency>
     </dependencies>
 
@@ -603,8 +617,10 @@
                                 </filter>
                             </filters>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>${jar.start.class}</mainClass>
                                 </transformer>
                             </transformers>
@@ -684,9 +700,9 @@
                             <backend>pdf</backend>
                             <attributes>
                                 <icons>font</icons>
-                                <pagenums />
-                                <toc />
-                                <idprefix />
+                                <pagenums/>
+                                <toc/>
+                                <idprefix/>
                                 <idseparator>-</idseparator>
                             </attributes>
                         </configuration>

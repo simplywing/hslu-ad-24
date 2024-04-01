@@ -3,9 +3,9 @@ package ch.hslu.ad.sw01ex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class Canvas {
+public final class RecursionMaze {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Canvas.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RecursionMaze.class);
     private final char activePixelMarker = '▒';
     private final int width = 11;
     private final int height = 10;
@@ -15,7 +15,7 @@ public final class Canvas {
     private int setPixelCallCount = 0;
     private CanvasIndex activePixel;
 
-    Canvas() {
+    RecursionMaze() {
         String initialState = """
                 ▓▓▓▓▓▓▓▓▓▓▓
                 ▓       ▓▓▓

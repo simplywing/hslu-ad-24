@@ -21,7 +21,7 @@ public final class HashTableKV<K, V> implements IHashTableKV<K, V> {
             throw new IllegalArgumentException("Key cannot be null.");
         }
 
-        int index = key.hashCode() % this.table.length;
+        int index = Math.abs(key.hashCode() % this.table.length);
         if (null == this.table[index]) {
             this.table[index] = new LinkedList<>();
         }
@@ -36,7 +36,7 @@ public final class HashTableKV<K, V> implements IHashTableKV<K, V> {
             throw new IllegalArgumentException("Key cannot be null");
         }
 
-        int index = key.hashCode() % this.table.length;
+        int index = Math.abs(key.hashCode() % this.table.length);
         if (null == this.table[index]) {
             return null;
         }

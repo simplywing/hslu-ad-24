@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.hslu.ad.sw05ex.balls;
+package ch.hslu.ad.helper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,8 @@ public final class Canvas {
     private final JFrame frame;
     private final CanvasPane canvas;
     private final Color backgroundColor;
+
+    private final String iconFile = "/icon2.png";
     private final List<Object> objects;
     private final HashMap<Object, ShapeDescription> shapes;
     private Graphics2D graphic;
@@ -55,12 +58,12 @@ public final class Canvas {
      * @param height  the desired height for the canvas.
      * @param bgColor the desired background color of the canvas.
      */
-    private Canvas(String title, int width, int height, Color bgColor) {
+    private Canvas(String title, int width, int height, Color bgColor, String iconFile) {
         frame = new JFrame();
         canvas = new CanvasPane();
 
         //Add Icon
-        ImageIcon frameIcon = new ImageIcon(Objects.requireNonNull(Canvas.class.getResource("/icon2.png")));
+        ImageIcon frameIcon = this.getIcon(iconFile);
         frame.setIconImage(frameIcon.getImage());
         frame.setContentPane(canvas);
         frame.setTitle(title);
@@ -78,10 +81,10 @@ public final class Canvas {
      * Factory method to initialize the Canvas singleton Object.
      * Must be called before using getCanvas();
      */
-    public static Canvas initCanvas(final String title, final int width, final int height, final Color color) {
+    public static Canvas initCanvas(final String title, final int width, final int height, final Color color, final String iconFile) {
         synchronized (Canvas.lock1) {
             if (canvasSingleton == null) {
-                canvasSingleton = new Canvas(title, width, height, color);
+                canvasSingleton = new Canvas(title, width, height, color, iconFile);
             } else {
                 throw new IllegalStateException("Canvas can only be initialized once.");
             }
@@ -153,7 +156,7 @@ public final class Canvas {
     // Note: this is a slightly backwards way of maintaining the shape
     // objects. It is carefully designed to keep the visible shape interfaces
     // in this project clean and simple for educational purposes.
-    public synchronized void draw(Object referenceObject, String color, Shape shape) {
+    public synchronized void draw(Object referenceObject, Color color, Shape shape) {
         objects.remove(referenceObject);   // just in case it was already there
         objects.add(referenceObject);      // add at the end
         shapes.put(referenceObject, new ShapeDescription(shape, color));
@@ -174,35 +177,10 @@ public final class Canvas {
     /**
      * Set the foreground color of the Canvas.
      *
-     * @param colorString the new color for the foreground of the Canvas.
+     * @param color the new color for the foreground of the Canvas.
      */
-    public void setForegroundColor(String colorString) {
-        switch (colorString) {
-            case "red":
-                graphic.setColor(new Color(235, 25, 25));
-                break;
-            case "black":
-                graphic.setColor(Color.black);
-                break;
-            case "blue":
-                graphic.setColor(new Color(30, 75, 220));
-                break;
-            case "yellow":
-                graphic.setColor(new Color(255, 230, 0));
-                break;
-            case "green":
-                graphic.setColor(new Color(80, 160, 60));
-                break;
-            case "magenta":
-                graphic.setColor(Color.magenta);
-                break;
-            case "white":
-                graphic.setColor(Color.white);
-                break;
-            default:
-                graphic.setColor(Color.black);
-                break;
-        }
+    public void setForegroundColor(Color color) {
+        graphic.setColor(color);
     }
 
     /**
@@ -242,6 +220,17 @@ public final class Canvas {
         graphic.setColor(original);
     }
 
+    private ImageIcon getIcon(final String iconFileName) {
+        URL resource;
+
+        resource = Canvas.class.getResource(iconFileName);
+        if (null == resource) {
+            resource = Canvas.class.getResource("/" + iconFileName);
+        }
+
+        return new ImageIcon(Objects.requireNonNull(resource));
+    }
+
     /**
      * Inner class CanvasPane - the actual canvas component contained in the
      * Canvas frame. This is essentially a JPanel with added capability to
@@ -265,15 +254,15 @@ public final class Canvas {
     private class ShapeDescription {
 
         private final Shape shape;
-        private final String colorString;
+        private final Color color;
 
-        public ShapeDescription(Shape shape, String color) {
+        public ShapeDescription(Shape shape, Color color) {
             this.shape = shape;
-            colorString = color;
+            this.color = color;
         }
 
         public void draw(Graphics2D graphic) {
-            setForegroundColor(colorString);
+            setForegroundColor(color);
             graphic.fill(shape);
         }
     }

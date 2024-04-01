@@ -1,7 +1,5 @@
 package ch.hslu.ad.sw02ex;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -76,8 +74,7 @@ public final class MyListSL<T> implements Iterable<T> {
         }
         return false;
     }
-
-    @NotNull
+    
     @Override
     public Iterator<T> iterator() {
         return new MyIterator(this.head);

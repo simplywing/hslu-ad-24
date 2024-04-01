@@ -28,10 +28,10 @@ public class DemoBallsMT {
      * @param args not used.
      */
     public static void main(final String[] args) {
-        final Canvas cvs = Canvas.initCanvas("Ball Demo", 800, 500, Color.black);
+        final Canvas cvs = Canvas.initCanvas("Ball Demo", 1280, 800, Color.black);
         final String[] color = {"red", "black", "blue", "yellow", "green", "magenta"};
         final int[] size = {10, 12, 14, 16, 18};
-        final int ballCount = 100;
+        final int ballCount = 20;
 
         final boolean useVirtualThreads = true;
 

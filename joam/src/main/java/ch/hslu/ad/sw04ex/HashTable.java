@@ -20,7 +20,7 @@ public final class HashTable<T> implements IHashTable<T> {
         if (null == obj) {
             throw new IllegalArgumentException("Null cannot be added to the HashTable");
         }
-        int index = obj.hashCode() % this.table.length;
+        int index = Math.abs(obj.hashCode() % this.table.length);
         if (null == this.table[index]) {
             this.table[index] = new LinkedList<>();
         }
@@ -31,7 +31,7 @@ public final class HashTable<T> implements IHashTable<T> {
 
     @Override
     public T get(int key) {
-        int index = key % this.table.length;
+        int index = Math.abs(key % this.table.length);
         if (null == this.table[index]) {
             return null;
         }
@@ -45,7 +45,7 @@ public final class HashTable<T> implements IHashTable<T> {
             throw new IllegalArgumentException("Key cannot be null");
         }
 
-        int index = key.hashCode() % this.table.length;
+        int index = Math.abs(key.hashCode() % this.table.length);
         if (null == this.table[index]) {
             return null;
         }
