@@ -47,11 +47,12 @@ public class JoinAndSleep {
         thread2.start();
         thread3.start();
 
+        // sleep for 500ms and interrupt a thread to see what happens
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             LOG.warn(e.getMessage());
         }
-        thread3.interrupt();
+        thread2.interrupt();
     }
 }
