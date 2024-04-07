@@ -56,6 +56,9 @@ public final class Semaphore {
         if (limit < 0) {
             throw new IllegalArgumentException("limit cannot be lower than 0" + limit + " < 0");
         }
+        if (limit < permits) {
+            throw new IllegalArgumentException("limit must be equal to or higher than the permits count");
+        }
         this.sema = permits;
         this.limit = limit;
         this.waitingCount = 0;
@@ -83,6 +86,9 @@ public final class Semaphore {
      *                                        wird.
      */
     public synchronized void acquire(final int permits) throws InterruptedException {
+        if (permits > this.limit) {
+            throw new IllegalArgumentException("cannot acquire " + permits + " permits because the Semaphore limit is set to " + this.limit + " permits");
+        }
         while (sema < permits) {
             waitingCount += permits;
             this.wait();

@@ -21,7 +21,7 @@ class SemaphoreTest {
         mySema.acquire();
 
         //start a Thread to acquire the semaphore
-        Thread.startVirtualThread(new SemaphoreAcquirer(mySema));
+        Thread.startVirtualThread(new SemaphoreAcquirer(mySema, 1));
         Thread.sleep(1000);
 
         //now one thread should be pending/waiting
@@ -51,17 +51,42 @@ class SemaphoreTest {
         });
     }
 
-    private static class SemaphoreAcquirer implements Runnable {
-        private final Semaphore testSemaphore;
+    @Test
+    void testSemaphoreMultipleReleaseMultipleAcquire() {
+        Semaphore mySema = new Semaphore(0, 3);
+        assertDoesNotThrow(() -> {
+            mySema.release(3);
+            mySema.acquire(3);
+        });
+    }
 
-        SemaphoreAcquirer(Semaphore sema) {
-            this.testSemaphore = sema;
-        }
+    @Test
+    void testSemaphoreMultipleAcquireOverLimit() {
+        Semaphore mySema = new Semaphore(3, 3);
+        assertThrows(IllegalArgumentException.class, () -> {
+            mySema.acquire(4);
+        });
+    }
 
+    @Test
+    void testSemaphoreMultipleAcquireWait() throws InterruptedException {
+        Semaphore mySema = new Semaphore(3, 3);
+        mySema.acquire();
+
+        Thread.startVirtualThread(new SemaphoreAcquirer(mySema, 3));
+        Thread.sleep(1000);
+        assertEquals(3, mySema.pending());
+
+        mySema.release();
+        Thread.sleep(1000);
+        assertEquals(0, mySema.pending());
+    }
+
+    private static record SemaphoreAcquirer(Semaphore testSemaphore, int permits) implements Runnable {
         @Override
         public void run() {
             try {
-                testSemaphore.acquire();
+                this.testSemaphore.acquire(permits);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
