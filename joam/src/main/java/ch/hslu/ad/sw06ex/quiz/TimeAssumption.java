@@ -8,8 +8,8 @@ public class TimeAssumption {
 
     public static void main(String[] args) {
 
-        System.out.println("Counter hat begonnen zu zählen");
         Thread incrementerThread = new Thread(() -> {
+            System.out.println("Counter hat begonnen zu zählen");
             for (int i = 0; i < 100000; i++) {
                 counter++;
             }
