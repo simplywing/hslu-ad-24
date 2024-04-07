@@ -48,7 +48,7 @@ public final class DemoWaitPool {
         final MyTask waiter = new MyTask(semaphore);
         new Thread(waiter).start();
 
-        LOG.info("Sleeping for 1000 ms...");
+        LOG.info("Sleeping for 5000 ms...");
         Thread.sleep(5000);
 
         LOG.info("Releasing Semaphore");

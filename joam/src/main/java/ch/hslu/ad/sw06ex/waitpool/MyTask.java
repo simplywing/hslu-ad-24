@@ -31,7 +31,7 @@ public final class MyTask implements Runnable {
     /**
      * Erzeugen einen Task.
      *
-     * @param lock für die Synchronisation
+     * @param semaphore für die Synchronisation
      */
     public MyTask(final Semaphore semaphore) {
         this.semaphore = semaphore;
