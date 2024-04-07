@@ -16,7 +16,7 @@
 package ch.hslu.ad.sw06ex.signal;
 
 /**
- * Ein nach oben nicht begrenztes Semaphor, d.h. der Semaphoren zähler kann
+ * Ein nach oben begrenztes Semaphor, d.h. der Semaphoren zähler kann nicht
  * unendlich wachsen.
  */
 public final class Semaphore {
