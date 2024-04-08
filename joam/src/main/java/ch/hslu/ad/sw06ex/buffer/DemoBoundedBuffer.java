@@ -42,36 +42,46 @@ public final class DemoBoundedBuffer {
      */
     public static void main(final String args[]) throws InterruptedException {
         final Random random = new Random();
+
         final int nPros = 3;
         final Producer[] producers = new Producer[nPros];
         final ThreadGroup prosGroup = new ThreadGroup("Producer-Threads");
+
         final int mCons = 2;
         final Consumer[] consumers = new Consumer[mCons];
         final ThreadGroup consGroup = new ThreadGroup("Consumer-Threads");
+
         final BoundedBuffer<Integer> queue = new BoundedBuffer<>(50);
+
         for (int i = 0; i < nPros; i++) {
             producers[i] = new Producer(queue, random.nextInt(10000));
             new Thread(prosGroup, producers[i], "Prod  " + (char) (i + 65)).start();
         }
+
         for (int i = 0; i < mCons; i++) {
             consumers[i] = new Consumer(queue);
             new Thread(consGroup, consumers[i], "Cons " + (char) (i + 65)).start();
         }
+
         while (prosGroup.activeCount() > 0) {
             Thread.yield();
         }
+
         TimeUnit.MILLISECONDS.sleep(100);
         consGroup.interrupt();
+
         long sumPros = 0;
         for (int i = 0; i < nPros; i++) {
             LOG.info("Prod {} = {}", (char) (i + 65), producers[i].getSum());
             sumPros += producers[i].getSum();
         }
+
         long sumCons = 0;
         for (int i = 0; i < mCons; i++) {
             LOG.info("Cons {} = {}", (char) (i + 65), consumers[i].getSum());
             sumCons += consumers[i].getSum();
         }
+
         LOG.info("{} = {}", sumPros, sumCons);
         LOG.info("queue size = {}", queue.size());
         LOG.info("queue empty? {}", queue.empty());
