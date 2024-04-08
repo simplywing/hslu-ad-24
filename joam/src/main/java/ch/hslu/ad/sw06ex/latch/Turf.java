@@ -44,7 +44,7 @@ public final class Turf {
         final Synch starterBox = new Latch();
         final Collection<Thread> threads = new ArrayList<>();
         for (int i = 1; i <= HORSES; i++) {
-            Thread vThread = Thread.startVirtualThread(new RaceHorse(starterBox, "🐎 " + i));
+            Thread vThread = Thread.startVirtualThread(new RaceHorse(starterBox, "🏇 " + i));
             threads.add(vThread);
         }
 
@@ -54,7 +54,7 @@ public final class Turf {
         LOG.info("Start! 🔫");
         starterBox.release();
 
-        LOG.info("Wait for all 🐎 to finish...");
+        LOG.info("Wait for all 🏇 to finish...");
         threads.forEach((Thread t) -> {
             try {
                 t.join();
@@ -63,6 +63,6 @@ public final class Turf {
             }
         });
 
-        LOG.info("All 🐎 finished!");
+        LOG.info("All 🏇 finished!");
     }
 }
