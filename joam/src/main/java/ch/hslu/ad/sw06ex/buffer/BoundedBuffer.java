@@ -97,7 +97,7 @@ public final class BoundedBuffer<T> implements Buffer<T> {
 
     @Override
     public boolean full() {
-        return !this.queue.isEmpty();
+        return !this.empty();
     }
 
     @Override
