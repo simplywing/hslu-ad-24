@@ -28,7 +28,7 @@ import java.util.concurrent.Semaphore;
 public final class Turf {
 
     private static final Logger LOG = LoggerFactory.getLogger(Turf.class);
-    private static final int HORSES = 5;
+    private static final int HORSES = 10;
 
     private static final Semaphore readySignal = new Semaphore(0);
 
