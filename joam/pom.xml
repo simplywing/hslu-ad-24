@@ -1,47 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- * Copyright 2024 Roland Gisler, HSLU Informatik, Switzerland
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
--->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>ch.hslu</groupId>
     <artifactId>oop_maven_template</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
     <name>oop_maven_template</name>
-    <description>
-        Projekt-Template für Java-Projekte an der HSLU. Details siehe unter Beschreibung.
-    </description>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>Projekt-Template für Java-Projekte an der HSLU. Details siehe unter Beschreibung.</description>
     <url>https://hslu-i1.gitlab.io/oop/${project.artifactId}</url>
-
-    <organization>
-        <name>Hochschule Luzern - Informatik</name>
-        <url>https://www.hslu.ch/informatik/</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
+    <issueManagement>
+        <system>GitLab Repository - HSLU I</system>
+        <url>https://gitlab.switch.ch/${scm.group.name}/${project.artifactId}/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>GitLab Pipelines - HSLU I</system>
+        <url>https://gitlab.switch.ch/${scm.group.name}/${project.artifactId}/pipelines/</url>
+    </ciManagement>
     <developers>
         <developer>
             <id>${scm.developer.uid}</id>
@@ -53,7 +27,12 @@
             </roles>
         </developer>
     </developers>
-
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
     <scm>
         <connection>
             scm:git:https://${scm.developer.uid}@gitlab.switch.ch/hslu/${scm.group.name}/${project.artifactId}.git
@@ -61,248 +40,34 @@
         <developerConnection>scm:git:ssh://git@gitlab.switch.ch/${scm.group.name}/${project.artifactId}.git
         </developerConnection>
         <url>https://gitlab.switch.ch/hslu-i1/${scm.group.name}/${project.artifactId}/tree/develop</url>
-        <tag>HEAD</tag>
     </scm>
-
-    <issueManagement>
-        <system>GitLab Repository - HSLU I</system>
-        <url>https://gitlab.switch.ch/${scm.group.name}/${project.artifactId}/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>GitLab Pipelines - HSLU I</system>
-        <url>https://gitlab.switch.ch/${scm.group.name}/${project.artifactId}/pipelines/</url>
-    </ciManagement>
-
-    <properties>
-        <!-- VM-Args (z.B. Memory-Settings) für Unit- und Integrationstests. -->
-        <argLine>-Xms512m -Xmx1g -Xss10m</argLine>
-
-        <!-- Hier ggf. andere Startklasse anpassen! -->
-        <jar.start.class>ch.hslu.demo.DemoApp</jar.start.class>
-
-        <!-- Folgende Werte für SCM/User/Deployment/Docker anpassen! -->
-        <scm.group.name>hslu/edu/bachelor-computer-science/somewhere</scm.group.name>
-        <scm.developer.uid>zbgisler</scm.developer.uid>
-        <scm.project.id>37888250</scm.project.id>
-        <docker.user>rgisler</docker.user>
-        <docker.base.image>amazoncorretto:21.0.2-alpine</docker.base.image>
-        <docker.image>oop-demo</docker.image>
-
-        <project.build.targetJdk>21</project.build.targetJdk>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <project.maven.version>3.6.3</project.maven.version>
-
-        <checkstyle.config.location>${project.basedir}/config/checkstyle/checkstyle.xml</checkstyle.config.location>
-        <pmd.config.location>${project.basedir}/config/pmd/pmd_hslu.xml</pmd.config.location>
-
-        <mavenChangesPlugin.version>2.12.1</mavenChangesPlugin.version>
-        <mavenChangelogPlugin.version>2.3</mavenChangelogPlugin.version>
-        <mavenCheckstylePlugin.version>3.3.1</mavenCheckstylePlugin.version>
-        <mavenFailsafePlugin.version>${mavenSurefirePlugin.version}</mavenFailsafePlugin.version>
-        <mavenJavadocPlugin.version>3.6.3</mavenJavadocPlugin.version>
-        <mavenJxrPlugin.version>3.3.2</mavenJxrPlugin.version>
-        <mavenPmdPlugin.version>3.21.2</mavenPmdPlugin.version>
-        <mavenProjectInfoReportsPlugin.version>3.5.0</mavenProjectInfoReportsPlugin.version>
-        <mavenSourcePlugin.version>3.3.0</mavenSourcePlugin.version>
-        <mavenSurefirePlugin.version>3.2.5</mavenSurefirePlugin.version>
-        <mavenSurefireReportPlugin.version>${mavenSurefirePlugin.version}</mavenSurefireReportPlugin.version>
-
-        <asciidoctorPlugin.version>2.2.6</asciidoctorPlugin.version>
-        <jacocoPlugin.version>0.8.11</jacocoPlugin.version>
-        <spotbugsPlugin.version>4.8.3.1</spotbugsPlugin.version>
-        <versionsPlugin.version>2.16.2</versionsPlugin.version>
-
-        <asciidoctorj.pdf.version>2.3.12</asciidoctorj.pdf.version>
-        <asciidoctorj.version>2.5.11</asciidoctorj.version>
-
-        <slf4j.version>2.0.12</slf4j.version>
-        <logback.version>1.5.0</logback.version>
-
-        <junit5.version>5.10.2</junit5.version>
-        <junit5.plattform.version>1.10.2</junit5.plattform.version>
-
-        <openjfx.version>21.0.2</openjfx.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-controls</artifactId>
-                <version>${openjfx.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-fxml</artifactId>
-                <version>${openjfx.version}</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit5.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>${junit5.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit5.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-commons</artifactId>
-                <version>${junit5.plattform.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-surefire-provider</artifactId>
-                <version>${junit5.plattform.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>3.25.3</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit-pioneer</groupId>
-                <artifactId>junit-pioneer</artifactId>
-                <version>2.2.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mutabilitydetector</groupId>
-                <artifactId>MutabilityDetector</artifactId>
-                <version>0.10.6</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>nl.jqno.equalsverifier</groupId>
-                <artifactId>equalsverifier</artifactId>
-                <version>3.15.6</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.github.hakky54</groupId>
-                <artifactId>consolecaptor</artifactId>
-                <version>1.0.3</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit-pioneer</groupId>
-            <artifactId>junit-pioneer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mutabilitydetector</groupId>
-            <artifactId>MutabilityDetector</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>nl.jqno.equalsverifier</groupId>
-            <artifactId>equalsverifier</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.hakky54</groupId>
-            <artifactId>consolecaptor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>20.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>20.0.1</version>
-        </dependency>
-    </dependencies>
-
+    <organization>
+        <name>Hochschule Luzern - Informatik</name>
+        <url>https://www.hslu.ch/informatik/</url>
+    </organization>
     <build>
+        <defaultGoal>install</defaultGoal>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
-        <defaultGoal>install</defaultGoal>
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>3.6.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-changes-plugin</artifactId>
                     <version>${mavenChangesPlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${mavenCheckstylePlugin.version}</version>
                     <dependencies>
@@ -314,12 +79,10 @@
                     </dependencies>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.3.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.12.1</version>
                     <configuration>
@@ -327,57 +90,46 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.6.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.1.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.4.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${mavenFailsafePlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>3.1.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${mavenJavadocPlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jxr-plugin</artifactId>
                     <version>${mavenJxrPlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>${mavenPmdPlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>3.0.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.1</version>
                     <configuration>
@@ -385,22 +137,18 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>3.5.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.12.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${mavenSourcePlugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${mavenSurefirePlugin.version}</version>
                 </plugin>
@@ -458,11 +206,9 @@
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${project.build.targetJdk}</source>
@@ -474,7 +220,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
                     <configLocation>${checkstyle.config.location}</configLocation>
@@ -489,11 +234,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
@@ -512,11 +255,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -525,13 +264,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
@@ -544,13 +284,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <show>package</show>
-                    <attach>true</attach>
-                    <additionalJOption>-html5</additionalJOption>
-                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -559,16 +293,19 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <show>package</show>
+                    <attach>true</attach>
+                    <additionalJOption>-html5</additionalJOption>
+                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <executions>
                     <execution>
@@ -617,10 +354,8 @@
                                 </filter>
                             </filters>
                             <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer/>
+                                <transformer>
                                     <mainClass>${jar.start.class}</mainClass>
                                 </transformer>
                             </transformers>
@@ -629,15 +364,10 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -646,9 +376,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
@@ -657,24 +389,6 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>${asciidoctorj.pdf.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj</artifactId>
-                        <version>${asciidoctorj.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>
-                    <attributes>
-                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
-                    </attributes>
-                </configuration>
                 <executions>
                     <execution>
                         <id>generate-http-doc</id>
@@ -708,6 +422,24 @@
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>${asciidoctorj.pdf.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+                    <attributes>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                    </attributes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -735,27 +467,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <includeTests>true</includeTests>
-                    <targetJdk>${project.build.targetJdk}</targetJdk>
-                    <analysisCache>true</analysisCache>
-                    <rulesets>
-                        <ruleset>${pmd.config.location}</ruleset>
-                    </rulesets>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>9.6</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -805,22 +516,145 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>opentest4j</artifactId>
+                    <groupId>org.opentest4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit-platform-commons</artifactId>
+                    <groupId>org.junit.platform</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>apiguardian-api</artifactId>
+                    <groupId>org.apiguardian</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>apiguardian-api</artifactId>
+                    <groupId>org.apiguardian</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit-platform-engine</artifactId>
+                    <groupId>org.junit.platform</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>apiguardian-api</artifactId>
+                    <groupId>org.apiguardian</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.25.3</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>byte-buddy</artifactId>
+                    <groupId>net.bytebuddy</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit-pioneer</groupId>
+            <artifactId>junit-pioneer</artifactId>
+            <version>2.2.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit-platform-launcher</artifactId>
+                    <groupId>org.junit.platform</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mutabilitydetector</groupId>
+            <artifactId>MutabilityDetector</artifactId>
+            <version>0.10.6</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsr305</artifactId>
+                    <groupId>com.google.code.findbugs</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>3.15.6</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>objenesis</artifactId>
+                    <groupId>org.objenesis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>byte-buddy</artifactId>
+                    <groupId>net.bytebuddy</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>consolecaptor</artifactId>
+            <version>1.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${openjfx.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${openjfx.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
+    </dependencies>
     <reporting>
         <plugins>
-            <!-- Uncomment this section when using a scm/vcs.
             <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-changelog-plugin</artifactId>
-                 <version>${mavenChangelogPlugin.version}</version>
-                 <configuration>
-                     <type>range</type>
-                     <range>365</range>
-                 </configuration>
-            </plugin>
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>${mavenChangesPlugin.version}</version>
                 <configuration>
@@ -835,7 +669,6 @@
                 </reportSets>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${mavenCheckstylePlugin.version}</version>
                 <configuration>
@@ -850,34 +683,15 @@
                     </testSourceDirectories>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${mavenPmdPlugin.version}</version>
-                <configuration>
-                    <includeTests>true</includeTests>
-                    <linkXRef>true</linkXRef>
-                    <targetJdk>${project.build.targetJdk}</targetJdk>
-                    <analysisCache>true</analysisCache>
-                    <rulesets>
-                        <ruleset>${pmd.config.location}</ruleset>
-                    </rulesets>
-                </configuration>
-            </plugin>
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${mavenJxrPlugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>${mavenProjectInfoReportsPlugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${mavenJavadocPlugin.version}</version>
                 <configuration>
@@ -887,7 +701,6 @@
                 </configuration>
                 <reportSets>
                     <reportSet>
-                        <id>default</id>
                         <reports>
                             <report>javadoc</report>
                         </reports>
@@ -901,12 +714,10 @@
                 </reportSets>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${mavenSourcePlugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>${mavenSurefireReportPlugin.version}</version>
             </plugin>
@@ -947,19 +758,83 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <repositories>
-        <!-- Achtung, URLs müssen pro Projekt angepasst werden! -->
-        <!-- Eigenes Repository bei Bedarf aktivieren (MMP), Zugriffsrechte!
-        <repository>
-            <id>gitlab-maven-repo</id>
-            <url>https://gitlab.switch.com/api/v4/projects/${scm.project.id}/packages/maven</url>
-        </repository>
-        -->
-    </repositories>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-commons</artifactId>
+                <version>${junit5.plattform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-surefire-provider</artifactId>
+                <version>${junit5.plattform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.25.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit-pioneer</groupId>
+                <artifactId>junit-pioneer</artifactId>
+                <version>2.2.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mutabilitydetector</groupId>
+                <artifactId>MutabilityDetector</artifactId>
+                <version>0.10.6</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>nl.jqno.equalsverifier</groupId>
+                <artifactId>equalsverifier</artifactId>
+                <version>3.15.6</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.hakky54</groupId>
+                <artifactId>consolecaptor</artifactId>
+                <version>1.0.3</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <distributionManagement>
-        <!-- Achtung, URLs müssen pro Projekt angepasst werden! -->
         <repository>
             <id>gitlab-maven-repo</id>
             <url>https://gitlab.com/api/v4/projects/${scm.project.id}/packages/maven</url>
@@ -973,4 +848,42 @@
             <url>https://hslu.pages.switch.ch/edu/bachelor-computer-science/somewhere/${project.artifactId}</url>
         </site>
     </distributionManagement>
+    <properties>
+        <docker.base.image>amazoncorretto:21.0.2-alpine</docker.base.image>
+        <scm.developer.uid>idammann</scm.developer.uid>
+        <mavenJxrPlugin.version>3.3.2</mavenJxrPlugin.version>
+        <docker.user>jammann</docker.user>
+        <mavenSurefireReportPlugin.version>${mavenSurefirePlugin.version}</mavenSurefireReportPlugin.version>
+        <slf4j.version>2.0.12</slf4j.version>
+        <project.build.targetJdk>21</project.build.targetJdk>
+        <versionsPlugin.version>2.16.2</versionsPlugin.version>
+        <mavenSurefirePlugin.version>3.2.5</mavenSurefirePlugin.version>
+        <asciidoctorPlugin.version>2.2.6</asciidoctorPlugin.version>
+        <scm.project.id>37888250</scm.project.id>
+        <logback.version>1.5.0</logback.version>
+        <mavenSourcePlugin.version>3.3.0</mavenSourcePlugin.version>
+        <mavenCheckstylePlugin.version>3.3.1</mavenCheckstylePlugin.version>
+        <mavenProjectInfoReportsPlugin.version>3.5.0</mavenProjectInfoReportsPlugin.version>
+        <project.maven.version>3.6.3</project.maven.version>
+        <spotbugsPlugin.version>4.8.3.1</spotbugsPlugin.version>
+        <mavenPmdPlugin.version>3.21.2</mavenPmdPlugin.version>
+        <mavenChangelogPlugin.version>2.3</mavenChangelogPlugin.version>
+        <mavenFailsafePlugin.version>${mavenSurefirePlugin.version}</mavenFailsafePlugin.version>
+        <mavenChangesPlugin.version>2.12.1</mavenChangesPlugin.version>
+        <openjfx.version>21.0.2</openjfx.version>
+        <pmd.config.location>${project.basedir}/config/pmd/pmd_hslu.xml</pmd.config.location>
+        <junit5.version>5.10.2</junit5.version>
+        <junit5.plattform.version>1.10.2</junit5.plattform.version>
+        <jar.start.class>ch.hslu.demo.DemoApp</jar.start.class>
+        <scm.group.name>hslu/edu/bachelor-computer-science/somewhere</scm.group.name>
+        <asciidoctorj.version>2.5.11</asciidoctorj.version>
+        <mavenJavadocPlugin.version>3.6.3</mavenJavadocPlugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <checkstyle.config.location>${project.basedir}/config/checkstyle/checkstyle.xml</checkstyle.config.location>
+        <asciidoctorj.pdf.version>2.3.12</asciidoctorj.pdf.version>
+        <jacocoPlugin.version>0.8.11</jacocoPlugin.version>
+        <docker.image>oop-demo</docker.image>
+        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+        <argLine>-Xms512m -Xmx1g -Xss10m</argLine>
+    </properties>
 </project>
