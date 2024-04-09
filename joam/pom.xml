@@ -79,7 +79,7 @@
         <argLine>-Xms512m -Xmx1g -Xss10m</argLine>
 
         <!-- Hier ggf. andere Startklasse anpassen! -->
-        <jar.start.class>ch.hslu.demo.DemoApp</jar.start.class>
+        <jar.start.class>ch.hslu.ad.helper.FXCanvas2</jar.start.class>
 
         <!-- Folgende Werte für SCM/User/Deployment/Docker anpassen! -->
         <scm.group.name>hslu/edu/bachelor-computer-science/somewhere</scm.group.name>
