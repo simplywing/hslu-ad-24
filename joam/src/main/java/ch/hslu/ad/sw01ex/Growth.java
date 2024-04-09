@@ -9,7 +9,7 @@ public final class Growth {
     }
 
     public static double log10(long N) {
-        return (double) (Math.log((double) N) / Math.log(10));
+        return (Math.log((double) N) / Math.log(10));
     }
 
     public static long factorial(long N) {
