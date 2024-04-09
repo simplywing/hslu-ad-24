@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 /**
  * Ein Rennpferd, das durch ein Startsignal losläuft. Nach einer zufälligen Zeit
@@ -28,6 +29,7 @@ public final class RaceHorse implements Runnable {
 
     private static final Logger LOG = LoggerFactory.getLogger(RaceHorse.class);
     private final Synch startSignal;
+    private final Semaphore readySignal;
     private final String name;
     private final Random random;
 
@@ -37,8 +39,9 @@ public final class RaceHorse implements Runnable {
      * @param startSignal Starterbox.
      * @param name        Name des Pferdes.
      */
-    public RaceHorse(final Synch startSignal, final String name) {
+    public RaceHorse(final Synch startSignal, final Semaphore readySignal, final String name) {
         this.startSignal = startSignal;
+        this.readySignal = readySignal;
         this.name = name;
         this.random = new Random();
     }
@@ -47,6 +50,7 @@ public final class RaceHorse implements Runnable {
     public void run() {
         LOG.info("{} geht in die Box.", name);
         try {
+            readySignal.release();
             startSignal.acquire();
             LOG.info("{} laeuft los...", name);
             Thread.sleep(random.nextInt(3000));

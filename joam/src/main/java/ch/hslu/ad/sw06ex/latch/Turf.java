@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.Semaphore;
 
 /**
  * Eine Rennbahn für das Pferderennen.
@@ -28,6 +29,8 @@ public final class Turf {
 
     private static final Logger LOG = LoggerFactory.getLogger(Turf.class);
     private static final int HORSES = 5;
+
+    private static final Semaphore readySignal = new Semaphore(0);
 
     /**
      * Privater Konstruktor.
@@ -44,12 +47,13 @@ public final class Turf {
         final Synch starterBox = new Latch();
         final Collection<Thread> threads = new ArrayList<>();
         for (int i = 1; i <= HORSES; i++) {
-            Thread vThread = Thread.startVirtualThread(new RaceHorse(starterBox, "🏇 " + i));
+            Thread vThread = Thread.startVirtualThread(new RaceHorse(starterBox, Turf.readySignal, "🏇 " + i));
             threads.add(vThread);
         }
 
-        LOG.info("Sleeping for 2 seconds...");
-        Thread.sleep(2000);
+        LOG.info("Acquiring {} ready signals...", HORSES);
+        Turf.readySignal.acquire(HORSES);
+        LOG.info("Got {} ready signals!", HORSES);
 
         LOG.info("Start! 🔫");
         starterBox.release();
