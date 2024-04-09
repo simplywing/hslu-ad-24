@@ -56,7 +56,7 @@ public final class Semaphore {
         if (limit < 0) {
             throw new IllegalArgumentException("limit cannot be lower than 0" + limit + " < 0");
         }
-        if (limit < permits) {
+        if (limit != 0 && limit < permits) {
             throw new IllegalArgumentException("limit must be equal to or higher than the permits count");
         }
         this.sema = permits;
