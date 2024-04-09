@@ -8,6 +8,10 @@ oder Blocksynchronisierung mit dem Schlüsselwort this implementiert. Nicht vert
 Sperre einer zugänglichen Klasse erlangen und auf unbestimmte Zeit halten. Folglich kann dies zu einer
 Deadlock-Situation führen.
 
+Oder einfach gesagt: Fremder Code könnte auf meinem Objekt `myObject` die `wait()` methode aufrufen und das Lock einfach
+nie mehr zurückgeben.
+So würde ein Deadlock entstehen, wenn Methoden auf dem `myObject` das Objekt selber als Monitor verwenden.
+
 > Sie haben bei denjenigen Methoden wo eine InterruptedException auftreten kann, diese an den Aufrufer weitergegeben.
 > Warum haben Sie das getan?
 
