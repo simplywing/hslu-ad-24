@@ -11,7 +11,7 @@ class RecursionMazeTest {
         var cvs = new RecursionMaze();
         cvs.colorArea(4, 3, '░', '▓');
 
-        System.out.println(String.format("colorArea() Method calls: %s", cvs.getColorAreaCallCount()));
-        System.out.println(String.format("setPixel() Method calls: %s", cvs.getSetPixelCallCount()));
+        System.out.printf("colorArea() Method calls: %s%n", cvs.getColorAreaCallCount());
+        System.out.printf("setPixel() Method calls: %s%n", cvs.getSetPixelCallCount());
     }
 }
