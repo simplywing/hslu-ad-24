@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -16,7 +18,7 @@ public final class FXCanvas extends Application {
 
     public static final int width = 1280;
     public static final int height = 800;
-
+    private static final Logger LOG = LoggerFactory.getLogger(FXCanvas.class);
 
     public static void main(String[] args) {
         launch(args);
@@ -45,7 +47,7 @@ public final class FXCanvas extends Application {
                 try {
                     Thread.sleep(1000 / 60);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    LOG.error(e.getMessage());
                 }
 
                 int finalI = i;

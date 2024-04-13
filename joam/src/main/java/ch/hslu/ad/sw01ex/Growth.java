@@ -5,7 +5,7 @@ import ch.hslu.ad.helper.AsciiTable;
 public final class Growth {
 
     public static double log2(long N) {
-        return (double) (Math.log((double) N) / Math.log(2));
+        return (Math.log((double) N) / Math.log(2));
     }
 
     public static double log10(long N) {

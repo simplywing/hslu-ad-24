@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.awt.*;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
@@ -87,7 +86,7 @@ class SmootherAnimation extends Canvas {
     //Frame duration in nanoseconds according to screen refresh rate
     private long frameNs = 1_000_000_000L / 60; //Default to 60Hz
 
-    public SmootherAnimation() throws IOException {
+    public SmootherAnimation() {
 
         AnimationTimer anim = new AnimationTimer() {
             private long previousFrame = 0;
