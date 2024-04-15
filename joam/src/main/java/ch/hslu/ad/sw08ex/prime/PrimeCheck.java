@@ -31,15 +31,16 @@ public final class PrimeCheck {
 
     private static final Logger LOG = LoggerFactory.getLogger(PrimeCheck.class);
 
+    private static final List<Future<BigInteger>> futures = new ArrayList<>();
+
     /**
      * Main-Demo.
      *
      * @param args not used.
      */
     public static void main(String[] args) {
-        List<Future<BigInteger>> futures = new ArrayList<>();
-
-        int threadCount = Runtime.getRuntime().availableProcessors() + 1;
+        boolean singleThreaded = false;
+        int threadCount = singleThreaded ? 1 : Runtime.getRuntime().availableProcessors() + 1;
         int primeCount = 100;
 
         long startTime = System.currentTimeMillis();
@@ -59,7 +60,7 @@ public final class PrimeCheck {
 
     private static class PrimeSearcher implements Callable<BigInteger> {
         @Override
-        public BigInteger call() throws Exception {
+        public BigInteger call() {
             while (true) {
                 BigInteger bi = new BigInteger(1024, new Random());
                 if (bi.isProbablePrime(Integer.MAX_VALUE)) {
