@@ -86,6 +86,9 @@ public final class Semaphore {
      *                                        wird.
      */
     public synchronized void acquire(final int permits) throws InterruptedException {
+        if (permits < 1) {
+            throw new IllegalArgumentException("permit count cannot be lower than 1.");
+        }
         if (permits > this.limit) {
             throw new IllegalArgumentException("cannot acquire " + permits + " permits because the Semaphore limit is set to " + this.limit + " permits");
         }
@@ -113,6 +116,9 @@ public final class Semaphore {
      * @param permits Anzahl Passiersignale zur Freigabe.
      */
     public synchronized void release(final int permits) {
+        if (permits < 1) {
+            throw new IllegalArgumentException("permit count cannot be lower than 1.");
+        }
         if (this.limit != 0 && this.sema + permits > this.limit) {
             throw new IllegalArgumentException("cannot release because limit is reached.");
         }

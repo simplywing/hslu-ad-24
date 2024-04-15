@@ -40,7 +40,7 @@ public final class DemoWaitPool {
      * @param args not used.
      * @throws InterruptedException wenn das Warten unterbrochen wird.
      */
-    public static void main(final String args[]) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         LOG.info("Acquiring Semaphore...");
         semaphore.acquire();
 
