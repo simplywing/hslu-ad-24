@@ -46,7 +46,7 @@ public final class DemoBankAccount {
         final ArrayList<BankAccount> source = new ArrayList<>();
         final ArrayList<BankAccount> target = new ArrayList<>();
         final int threadCount = Runtime.getRuntime().availableProcessors() + 1;
-        final int amount = 1_000_000;
+        final int amount = 10_000_000;
         final int number = 100;
         final int tries = 10;
 
