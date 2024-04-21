@@ -16,7 +16,7 @@ public final class Sort {
             toInsert = arr[i];
 
             // copy the element to insert to the zero index to eliminate one comparison
-            // in the shift left while loop. (dummy)
+            // in the shift right while loop. (dummy)
             arr[0] = toInsert;
 
             j = i;
