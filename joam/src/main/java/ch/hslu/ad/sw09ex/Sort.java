@@ -81,4 +81,24 @@ public final class Sort {
             arr[iSmallest] = toSwap;
         }
     }
+
+    public static void bubbleSort(final int[] arr) {
+        int tmp;
+        boolean swapped;
+
+        for (int j = 0; j < arr.length; j++) {
+            swapped = false;
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i - 1] > arr[i]) {
+                    tmp = arr[i - 1];
+                    arr[i - 1] = arr[i];
+                    arr[i] = tmp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                return;
+            }
+        }
+    }
 }

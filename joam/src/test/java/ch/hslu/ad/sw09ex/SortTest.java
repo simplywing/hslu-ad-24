@@ -103,4 +103,34 @@ class SortTest {
         System.out.println(Arrays.toString(data));
         assertSorted(data);
     }
+
+    @Test
+    void testBubbleSort() {
+        int[] data = {10, 8, 4, 2, 0, 11, 4, 2, 1, 6, 0, 3};
+
+        System.out.println(Arrays.toString(data));
+        Sort.bubbleSort(data);
+        System.out.println(Arrays.toString(data));
+        assertSorted(data);
+    }
+
+    @Test
+    void testBubbleSortRandomData() {
+        int[] data = TestData.getRandomIntArray(30, 0, 1000);
+
+        Sort.bubbleSort(data);
+
+        System.out.println(Arrays.toString(data));
+        assertSorted(data);
+    }
+
+    @Test
+    void testBubbleSortPseudoRandomData() {
+        int[] data = TestData.getSeededRandomIntArray(30, 0, 1000, TestData.TEST_SEED);
+
+        Sort.bubbleSort(data);
+
+        System.out.println(Arrays.toString(data));
+        assertSorted(data);
+    }
 }

@@ -64,6 +64,10 @@ public final class TestData {
     }
 
     public static int[] getAscendingIntArray(final int size) {
+        if (size < 1) {
+            throw new IllegalArgumentException("size must be 1 or higher");
+        }
+
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
             arr[i] = i + 1;
@@ -73,6 +77,10 @@ public final class TestData {
     }
 
     public static int[] getDescendingIntArray(final int size) {
+        if (size < 1) {
+            throw new IllegalArgumentException("size must be 1 or higher");
+        }
+
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
             arr[i] = size - i;

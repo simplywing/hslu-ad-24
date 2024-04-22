@@ -22,13 +22,16 @@ public final class Measurement {
     public static void main(String[] args) {
         // Configure sorting data sizes
 //        final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
-        final int[] testSizes = {100_000, 100_000};
+//        final int[] testSizes = {100_000, 100_000};
+        final int[] testSizes = {50_000, 50_000, 100_000};
+
 
         // Configure sorting methods to measure
         final List<SortMethod> testSortingMethods = new ArrayList<>();
         testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort"));
-        testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort"));
+//        testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort"));
         testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort"));
+        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort"));
 
         // Create Ascii Table to show results
         AsciiTable resultTable = new AsciiTable();

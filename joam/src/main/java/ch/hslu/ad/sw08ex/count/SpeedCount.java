@@ -70,7 +70,7 @@ public final class SpeedCount {
     public static void main(final String args[]) {
         final int passes = 10;
         final int threads = 20;
-        final int counts = 10_000;
+        final int counts = 100_000;
 
         final Counter counterSync = new SynchronizedCounter();
         long sumSync = 0;
