@@ -62,4 +62,23 @@ public final class TestData {
 
         return arr;
     }
+
+    public static int[] getAscendingIntArray(final int size) {
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = i + 1;
+        }
+
+        return arr;
+    }
+
+    public static int[] getDescendingIntArray(final int size) {
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = size - i;
+        }
+
+        return arr;
+    }
+
 }

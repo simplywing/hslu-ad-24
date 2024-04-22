@@ -4,40 +4,76 @@ import ch.hslu.ad.helper.AsciiTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 public final class Measurement {
 
     private static final Logger LOG = LoggerFactory.getLogger(Measurement.class);
 
+    public static long measureSort(Consumer<int[]> sortFunction, int[] data) {
+        long startTime = System.currentTimeMillis();
+        sortFunction.accept(data);
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
+    }
+
     public static void main(String[] args) {
-        final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
+        // Configure sorting data sizes
+//        final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
+        final int[] testSizes = {100_000, 100_000};
 
-        AsciiTable table = new AsciiTable();
-        table.getColumns().add(new AsciiTable.Column("Iteration"));
-        table.getColumns().add(new AsciiTable.Column("Element Count"));
-        table.getColumns().add(new AsciiTable.Column("Sorting Time (ms)"));
+        // Configure sorting methods to measure
+        final List<SortMethod> testSortingMethods = new ArrayList<>();
+        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort"));
+        testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort"));
+        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort"));
 
-        long startTime, endTime;
-
-        LOG.info("Insertion Sort Benchmark");
+        // Create Ascii Table to show results
+        AsciiTable resultTable = new AsciiTable();
+        resultTable.getColumns().add(new AsciiTable.Column("Iteration"));
+        resultTable.getColumns().add(new AsciiTable.Column("Element Count"));
+        for (SortMethod sortMethod : testSortingMethods) {
+            resultTable.getColumns().add(new AsciiTable.Column(sortMethod.name()));
+        }
 
         for (int i = 0; i < testSizes.length; i++) {
-            int[] arr = TestData.getSeededRandomIntArray(testSizes[i], 0, 10_000, TestData.TEST_SEED);
 
-            LOG.info("Sorting {} elements{}...", testSizes[i], (i == 0 ? " (Cold) " : ""));
-            startTime = System.currentTimeMillis();
-            Sort.insertionSort(arr);
-            endTime = System.currentTimeMillis();
-
+            // Add the Table row
             AsciiTable.Row row = new AsciiTable.Row();
-            table.getData().add(row);
+            resultTable.getData().add(row);
             row.getValues().add(i + (i == 0 ? " (Cold) " : ""));
-            row.getValues().add(String.valueOf(arr.length));
-            row.getValues().add(String.valueOf(endTime - startTime));
+            row.getValues().add(String.valueOf(testSizes[i]));
+
+            // Measure all sorting methods
+            for (SortMethod sortMethod : testSortingMethods) {
+                int[] randArr = TestData.getSeededRandomIntArray(testSizes[i], 0, 10_000, TestData.TEST_SEED);
+                int[] ascArr = TestData.getAscendingIntArray(testSizes[i]);
+                int[] descArr = TestData.getDescendingIntArray(testSizes[i]);
+
+                LOG.info("Sorting random {} elements{} with {}...", testSizes[i], (i == 0 ? " (Cold) " : ""), sortMethod.name());
+                long randomTime = measureSort(sortMethod.method(), randArr);
+                LOG.info("Sorting ascending {} elements{} with {}...", testSizes[i], (i == 0 ? " (Cold) " : ""), sortMethod.name());
+                long ascTime = measureSort(sortMethod.method(), ascArr);
+                LOG.info("Sorting descending {} elements{} with {}...", testSizes[i], (i == 0 ? " (Cold) " : ""), sortMethod.name());
+                long descTime = measureSort(sortMethod.method(), descArr);
+
+                // Add measurement of this sorting method to Table
+                row.getValues().add(String.format("%s, %s, %s", randomTime, ascTime, descTime));
+            }
         }
 
         // Display Results
         System.out.println();
-        table.calculateColumnWidth();
-        table.render();
+        System.out.println(" Measurements (ms): random, sorted asc, sorted desc");
+        System.out.println();
+        resultTable.calculateColumnWidth();
+        resultTable.render();
     }
+
+    private record SortMethod(Consumer<int[]> method, String name) {
+    }
+
 }
+

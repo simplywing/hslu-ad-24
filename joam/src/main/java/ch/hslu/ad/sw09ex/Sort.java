@@ -3,11 +3,33 @@ package ch.hslu.ad.sw09ex;
 public final class Sort {
 
     /**
-     * Optimized Insertion Sort
+     * Classic Insertion Sort
      *
      * @param arr Array of integers to be sorted in-place.
      */
     public static void insertionSort(final int[] arr) {
+        int toInsert;
+        int j;
+        for (int i = 0; i < arr.length; i++) {
+            toInsert = arr[i];
+
+            j = i;
+            // shift right until next element is not larger than what we want to insert.
+            // or we reached the left end of the array
+            while (j > 0 && arr[j - 1] > toInsert) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = toInsert;
+        }
+    }
+
+    /**
+     * Optimized Insertion Sort
+     *
+     * @param arr Array of integers to be sorted in-place.
+     */
+    public static void insertionSort2(final int[] arr) {
         int toInsert;
         int j, k;
         int iZero = arr[0];
@@ -39,5 +61,24 @@ public final class Sort {
             k++;
         }
         arr[k] = iZero;
+    }
+
+    public static void selectionSort(final int[] arr) {
+        int toSwap;
+        int iSmallest;
+
+        for (int i = 0; i < arr.length; i++) {
+            toSwap = arr[i];
+            iSmallest = i;
+
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j] <= arr[iSmallest]) {
+                    iSmallest = j;
+                }
+            }
+
+            arr[i] = arr[iSmallest];
+            arr[iSmallest] = toSwap;
+        }
     }
 }
