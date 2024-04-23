@@ -33,7 +33,9 @@ public final class Measurement {
         resultTable.getColumns().add(new AsciiTable.Column("Iteration"));
         resultTable.getColumns().add(new AsciiTable.Column("Element Count"));
         for (SortMethod sortMethod : testSortingMethods) {
-            resultTable.getColumns().add(new AsciiTable.Column(sortMethod.name()));
+            if (sortMethod.enabled()) {
+                resultTable.getColumns().add(new AsciiTable.Column(sortMethod.name()));
+            }
         }
 
         for (int i = 0; i < testSizes.length; i++) {
@@ -75,11 +77,12 @@ public final class Measurement {
 
     private static List<SortMethod> getSortMethods() {
         final List<SortMethod> testSortingMethods = new ArrayList<>();
-        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort", false));
         testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort", false));
-        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort", false));
         testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort", true));
-        testSortingMethods.add(new SortMethod(Sort::test, "Parallel Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort 2", true));
+        testSortingMethods.add(new SortMethod(Sort::test, "Parallel Sort", false));
         return testSortingMethods;
     }
 

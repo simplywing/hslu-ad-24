@@ -104,6 +104,26 @@ public final class Sort {
         }
     }
 
+    public static void bubbleSort2(final int[] arr) {
+        int tmp;
+        boolean swapped;
+
+        while (true) {
+            swapped = false;
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i - 1] > arr[i]) {
+                    tmp = arr[i - 1];
+                    arr[i - 1] = arr[i];
+                    arr[i] = tmp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                return;
+            }
+        }
+    }
+
     public static void test(final int[] arr) {
         Arrays.parallelSort(arr);
     }
