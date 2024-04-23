@@ -1,5 +1,7 @@
 package ch.hslu.ad.sw09ex;
 
+import java.util.Arrays;
+
 public final class Sort {
 
     /**
@@ -100,5 +102,9 @@ public final class Sort {
                 return;
             }
         }
+    }
+
+    public static void test(final int[] arr) {
+        Arrays.parallelSort(arr);
     }
 }

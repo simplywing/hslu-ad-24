@@ -25,13 +25,8 @@ public final class Measurement {
 //        final int[] testSizes = {100_000, 100_000};
         final int[] testSizes = {50_000, 50_000, 100_000};
 
-
         // Configure sorting methods to measure
-        final List<SortMethod> testSortingMethods = new ArrayList<>();
-        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort"));
-//        testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort"));
-        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort"));
-        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort"));
+        final List<SortMethod> testSortingMethods = getSortMethods();
 
         // Create Ascii Table to show results
         AsciiTable resultTable = new AsciiTable();
@@ -51,6 +46,9 @@ public final class Measurement {
 
             // Measure all sorting methods
             for (SortMethod sortMethod : testSortingMethods) {
+                if (!sortMethod.enabled()) {
+                    continue;
+                }
                 int[] randArr = TestData.getSeededRandomIntArray(testSizes[i], 0, 10_000, TestData.TEST_SEED);
                 int[] ascArr = TestData.getAscendingIntArray(testSizes[i]);
                 int[] descArr = TestData.getDescendingIntArray(testSizes[i]);
@@ -75,7 +73,17 @@ public final class Measurement {
         resultTable.render();
     }
 
-    private record SortMethod(Consumer<int[]> method, String name) {
+    private static List<SortMethod> getSortMethods() {
+        final List<SortMethod> testSortingMethods = new ArrayList<>();
+        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort", false));
+        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::test, "Parallel Sort", true));
+        return testSortingMethods;
+    }
+
+    private record SortMethod(Consumer<int[]> method, String name, boolean enabled) {
     }
 
 }
