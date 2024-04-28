@@ -124,7 +124,58 @@ public final class Sort {
         }
     }
 
-    public static void test(final int[] arr) {
+    public static void arraysParallelSort(final int[] arr) {
         Arrays.parallelSort(arr);
+    }
+
+    public static void shellSort(final int[] arr) {
+        int i, j, toInsert;
+        final int n = arr.length;
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (i = gap; i < n; i++) {
+
+                toInsert = arr[i];
+                j = i;
+
+                while (j >= gap && arr[j - gap] > toInsert) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+
+                arr[j] = toInsert;
+            }
+        }
+    }
+
+    public static void shellSort2(final int[] arr) {
+        // Ciura gap sequence
+        // original sequence: 1, 4, 10, 23, 57, 132, 301, 701
+        // extended with factor 2.25 and rounded to nearest int
+        final int[] sequence = {1, 4, 10, 23, 57, 132, 301, 701, 1750, 3938, 8861, 19937, 44858, 100931, 227095, 510964,
+                1149669, 2586755, 5820199, 13095448, 29464758, 66295706, 149165339, 335622013, 755149529, 1699086440};
+
+        int i, j, toInsert;
+        final int n = arr.length;
+        final int nHalf = n / 2;
+
+        for (int g = sequence.length - 1; g >= 0; g--) {
+            if (sequence[g] > nHalf) {
+                continue;
+            }
+
+            for (i = sequence[g]; i < n; i++) {
+
+                toInsert = arr[i];
+                j = i;
+
+                while (j >= sequence[g] && arr[j - sequence[g]] > toInsert) {
+                    arr[j] = arr[j - sequence[g]];
+                    j -= sequence[g];
+                }
+
+                arr[j] = toInsert;
+            }
+
+        }
     }
 }

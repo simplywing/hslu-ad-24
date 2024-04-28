@@ -2,6 +2,8 @@ package ch.hslu.ad.sw09ex;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SortTest {
@@ -93,6 +95,20 @@ class SortTest {
     void testBubbleSortPseudoRandomData() {
         int[] data = TestData.getSeededRandomIntArray(30, 0, 1000, TestData.TEST_SEED);
         Sort.bubbleSort(data);
+        assertSorted(data);
+    }
+
+    @Test
+    void testShellSort() {
+        int[] data = TestData.getRandomIntArray(10, 0, 20);
+        Sort.shellSort(data);
+        assertSorted(data);
+    }
+
+    @Test
+    void testShellSort2() {
+        int[] data = TestData.getRandomIntArray(10, 0, 20);
+        Sort.shellSort2(data);
         assertSorted(data);
     }
 }

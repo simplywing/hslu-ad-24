@@ -21,9 +21,10 @@ public final class Measurement {
 
     public static void main(String[] args) {
         // Configure sorting data sizes
-//        final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
-//        final int[] testSizes = {100_000, 100_000};
-        final int[] testSizes = {50_000, 50_000, 100_000, 200_000};
+        //final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
+        //final int[] testSizes = {100_000, 100_000};
+        //final int[] testSizes = {50_000, 50_000, 100_000, 200_000};
+        final int[] testSizes = {100_000, 100_000, 200_000, 400_000, 800_000, 1_600_000, 3_200_000, 6_400_000, 12_800_000, 25_600_000};
 
         // Configure sorting methods to measure
         final List<SortMethod> testSortingMethods = getSortMethods();
@@ -77,12 +78,14 @@ public final class Measurement {
 
     private static List<SortMethod> getSortMethods() {
         final List<SortMethod> testSortingMethods = new ArrayList<>();
-        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::insertionSort, "Insertion Sort", false));
         testSortingMethods.add(new SortMethod(Sort::insertionSort2, "Opt. Insertion Sort", false));
-        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort", true));
-        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort", true));
-        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort 2", false));
-        testSortingMethods.add(new SortMethod(Sort::test, "Parallel Sort", false));
+        testSortingMethods.add(new SortMethod(Sort::selectionSort, "Selection Sort", false));
+        testSortingMethods.add(new SortMethod(Sort::bubbleSort, "Bubble Sort", false));
+        testSortingMethods.add(new SortMethod(Sort::bubbleSort2, "Bubble Sort 2", false));
+        testSortingMethods.add(new SortMethod(Sort::arraysParallelSort, "Parallel Sort", false));
+        testSortingMethods.add(new SortMethod(Sort::shellSort, "Shell Sort", true));
+        testSortingMethods.add(new SortMethod(Sort::shellSort2, "Shell Sort 2", true));
         return testSortingMethods;
     }
 
