@@ -12,13 +12,6 @@ public final class Measurement {
 
     private static final Logger LOG = LoggerFactory.getLogger(Measurement.class);
 
-    public static long measureSort(Consumer<int[]> sortFunction, int[] data) {
-        long startTime = System.currentTimeMillis();
-        sortFunction.accept(data);
-        long endTime = System.currentTimeMillis();
-        return endTime - startTime;
-    }
-
     public static void main(String[] args) {
         // Configure sorting data sizes
         //final int[] testSizes = {100_000, 100_000, 100_000, 200_000, 400_000};
@@ -74,6 +67,13 @@ public final class Measurement {
         System.out.println();
         resultTable.calculateColumnWidth();
         resultTable.render();
+    }
+
+    private static long measureSort(Consumer<int[]> sortFunction, int[] data) {
+        long startTime = System.currentTimeMillis();
+        sortFunction.accept(data);
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
     }
 
     private static List<SortMethod> getSortMethods() {
