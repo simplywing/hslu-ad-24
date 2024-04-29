@@ -13,3 +13,4 @@ Exercises grouped in packages by semester weeks.
 - [sw06ex](https://github.com/simplywing/hslu-ad-24/tree/main/joam/src/main/java/ch/hslu/ad/sw06ex)
 - [sw08ex](https://github.com/simplywing/hslu-ad-24/tree/main/joam/src/main/java/ch/hslu/ad/sw08ex)
 - [sw09ex](https://github.com/simplywing/hslu-ad-24/tree/main/joam/src/main/java/ch/hslu/ad/sw09ex)
+- [sw10ex](https://github.com/simplywing/hslu-ad-24/tree/main/joam/src/main/java/ch/hslu/ad/sw10ex)
