@@ -178,4 +178,36 @@ public final class Sort {
 
         }
     }
+
+    public static void shellSort3(final int[] arr) {
+        // Hibbard gap sequence
+        // generated with: 2^{k} -1
+        final int[] sequence = {1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071,
+                262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455,
+                536870911, 1073741823, 2147483647};
+
+        int i, j, toInsert;
+        final int n = arr.length;
+        final int nHalf = n / 2;
+
+        for (int g = sequence.length - 1; g >= 0; g--) {
+            if (sequence[g] > nHalf) {
+                continue;
+            }
+
+            for (i = sequence[g]; i < n; i++) {
+
+                toInsert = arr[i];
+                j = i;
+
+                while (j >= sequence[g] && arr[j - sequence[g]] > toInsert) {
+                    arr[j] = arr[j - sequence[g]];
+                    j -= sequence[g];
+                }
+
+                arr[j] = toInsert;
+            }
+
+        }
+    }
 }
