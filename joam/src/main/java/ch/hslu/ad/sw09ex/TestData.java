@@ -35,6 +35,60 @@ public final class TestData {
     }
 
     /**
+     * Generates an array with random Characters from a-z based on Java.util.random.
+     *
+     * @param size size of the array
+     * @return char[] with random data
+     */
+    public static char[] getRandomCharArray(final int size) {
+        return getRandomCharArray(size, "abcdefghijklmnopqrstuvwxyz", (long) (Math.random() * Long.MAX_VALUE));
+    }
+
+    /**
+     * Generates an array with random Characters from alphabet based on java.util.random.
+     *
+     * @param size     size of the array
+     * @param alphabet alphabet of characters used to generate random data
+     * @return char[] with random data
+     */
+    public static char[] getRandomCharArray(final int size, final String alphabet) {
+        return getRandomCharArray(size, alphabet, (long) (Math.random() * Long.MAX_VALUE));
+    }
+
+    /**
+     * Generates an array with seeded random Characters from alphabet based on java.util.random.
+     *
+     * @param size size of the array
+     * @param seed seed used to instance java.util.random
+     * @return char[] with random data
+     */
+    public static char[] getRandomCharArray(final int size, final long seed) {
+        return getRandomCharArray(size, "abcdefghijklmnopqrstuvwxyz", seed);
+    }
+
+    /**
+     * Generates an array with seeded random Characters from alphabet based on java.util.random.
+     *
+     * @param size     size of the array
+     * @param alphabet alphabet of characters used to generate random data
+     * @param seed     seed used to instance java.util.random
+     * @return char[] with random data
+     */
+    public static char[] getRandomCharArray(final int size, final String alphabet, final long seed) {
+        if (size < 1) {
+            throw new IllegalArgumentException("size must be 1 or higher");
+        }
+
+        Random r = new Random(seed);
+        char[] arr = new char[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = alphabet.charAt(r.nextInt(alphabet.length()));
+        }
+
+        return arr;
+    }
+
+    /**
      * Generates an array with pseudo random Integers based on a fixed seed.
      * The same input parameters will always result in the same data being generated.
      *

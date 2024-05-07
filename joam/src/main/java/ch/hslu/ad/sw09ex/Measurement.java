@@ -86,7 +86,7 @@ public final class Measurement {
         testSortingMethods.add(new SortMethod(Sort::arraysParallelSort, "Parallel Sort", false));
         testSortingMethods.add(new SortMethod(Sort::shellSort, "Shell Sort", true));
         testSortingMethods.add(new SortMethod(Sort::shellSort2, "Shell Sort 2", true));
-        testSortingMethods.add(new SortMethod(Sort::shellSort3, "Shell Sort 3", true));
+        testSortingMethods.add(new SortMethod(Sort::shellSort3, "Shell Sort 3", false));
         return testSortingMethods;
     }
 
