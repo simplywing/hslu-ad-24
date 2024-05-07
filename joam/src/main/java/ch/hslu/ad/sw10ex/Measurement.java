@@ -15,7 +15,7 @@ public final class Measurement {
 
     public static void main(String[] args) {
         // Configure sorting data sizes
-        final int[] testSizes = {100_000, 100_000, 200_000, 400_000, 500_000, 800_000};
+        final int[] testSizes = {100_000, 100_000, 200_000, 400_000, 500_000, 800_000, 1_600_000, 5_000_000, 10_000_000};
 
         // Configure sorting methods to measure
         final List<SortMethod> testSortingMethods = getSortMethods();
@@ -84,6 +84,7 @@ public final class Measurement {
         testSortingMethods.add(new SortMethod(ch.hslu.ad.sw09ex.Sort::shellSort2, "Shell Sort 2", true));
         testSortingMethods.add(new SortMethod(Sort::quickSort, "Quick Sort", false));
         testSortingMethods.add(new SortMethod(Sort::quickSort2, "Quick Sort 2", true));
+        testSortingMethods.add(new SortMethod(Sort::quickInsertionSort, "Quick Insertion Sort", true));
         testSortingMethods.add(new SortMethod(Sort::heapSort, "Heap Sort", true));
         testSortingMethods.add(new SortMethod(Sort::arraysSort, "Arrays Sort", true));
 

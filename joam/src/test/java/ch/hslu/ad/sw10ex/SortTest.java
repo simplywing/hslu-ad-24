@@ -41,11 +41,18 @@ class SortTest {
         Sort.quickSort2(data);
         assertSorted(data);
     }
-    
+
     @Test
     void testHeapSort() {
         final int[] data = TestData.getRandomIntArray(500_000, 0, Integer.MAX_VALUE);
         Sort.heapSort(data);
+        assertSorted(data);
+    }
+
+    @Test
+    void testQuickInsertionSort() {
+        final int[] data = TestData.getRandomIntArray(500_000, 0, Integer.MAX_VALUE);
+        Sort.quickInsertionSort(data);
         assertSorted(data);
     }
 }
