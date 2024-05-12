@@ -15,7 +15,7 @@ public final class Measurement {
 
     public static void main(String[] args) {
         // Configure sorting data sizes
-        final int[] testSizes = {100_000, 100_000, 200_000, 400_000, 500_000, 800_000, 1_600_000, 5_000_000, 10_000_000};
+        final int[] testSizes = {5_000_000, 5_000_000, 10_000_000, 10_000_000};
 
         // Configure sorting methods to measure
         final List<SortMethod> testSortingMethods = getSortMethods();
