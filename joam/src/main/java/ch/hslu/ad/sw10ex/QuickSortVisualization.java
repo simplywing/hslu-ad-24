@@ -4,19 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class QuickSortVisualization {
-    //private static final String alphabet = "▉▊▋▍▎▏";
-    private static final Map<Integer, String> alphabet = new HashMap<>();
+    //private static final String alphabet = "▁▂▃▄▅▆▇█";
+    private static final Map<Integer, String> alphabet0 = Map.of(
+            0, "▁",
+            1, "▂",
+            2, "▃",
+            3, "▄",
+            4, "▅",
+            5, "▆",
+            6, "▇",
+            7, "█"
+    );
+    private static final Map<Integer, String> alphabet = Map.of(
+            0, "🔴",
+            1, "🟠",
+            2, "🟡",
+            3, "🟢",
+            4, "🔵",
+            5, "🟣"
+    );
     private static final int size = 12;
     private static final int sleepMs = 0;
 
     public static void main(String[] args) {
-        alphabet.put(0, "🔴");
-        alphabet.put(1, "🟠");
-        alphabet.put(2, "🟡");
-        alphabet.put(3, "🟢");
-        alphabet.put(4, "🔵");
-        alphabet.put(5, "🟣");
-
         int[] data = getArray();
         System.out.println("=============== Start shuffle ===============\n");
         shuffle(data);

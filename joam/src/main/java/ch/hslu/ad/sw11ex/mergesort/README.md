@@ -7,37 +7,37 @@ to `Integer.MAX_VALUE` using a constant seed.
 ```
  Threshold  Average Time (ms) 
  ---------  ----------------- 
- 5          433.9             
- 10         396.2             
- 20         371.2             
- 40         370.9             <-- lowest average time
- 60         371.2             
- 70         391.8             
- 80         422.2             
- 90         422.2             
- 100        422.6             
- 120        425.5             
- 140        424.5             
- 160        504.2             
- 180        501.2             
- 250        519.4             
- 500        692.1             
+ 5          211.3             
+ 10         173.5             
+ 20         165.6             
+ 40         167.1             
+ 60         164.6             <-- lowest average time
+ 70         169.6             
+ 80         169.6             
+ 90         170.9             
+ 100        179.8             
+ 120        171.3             
+ 140        175.3             
+ 160        197.1             
+ 180        193.6             
+ 250        189.1             
+ 500        235.9                      
 ```
 
-To hone in on the exact threshold with best performance, the test was repeated with a finer threshold stepping:
+To hone in on the exact threshold with the best performance, the test was repeated with a finer threshold stepping:
 
-```
+``` 
  Threshold  Average Time (ms) 
  ---------  ----------------- 
- 20         408.2             
- 25         409.1             
- 30         406.4             
- 35         407.7             
- 40         391.7             <-- lowest average time
- 45         422.4             
- 50         414.0             
- 55         415.0             
- 60         434.2             
+ 20         206.1             
+ 25         200.0             
+ 30         198.6             
+ 35         193.8             
+ 40         186.1             <-- lowest average time
+ 45         190.1             
+ 50         187.5             
+ 55         187.4             
+ 60         191.5             
 ```
 
 and again...
@@ -45,15 +45,19 @@ and again...
 ```
  Threshold  Average Time (ms) 
  ---------  ----------------- 
- 35         398.4             
- 36         390.3             
- 37         388.5             
- 38         391.0             
- 39         389.8             
- 40         407.5             
- 41         399.9             
- 42         400.2             
- 43         399.1             
- 44         408.0             
- 45         396.3             
+ 35         206.3             
+ 36         193.9             
+ 37         206.2             
+ 38         192.2             
+ 39         189.6             
+ 40         184.6             
+ 41         187.4             
+ 42         184.4             <-- lowest average time
+ 43         191.3             
+ 44         188.9             
+ 45         186.0             
 ```
+
+Obviously the best performing threshold is 42. :)
+
+Jokes aside, somewhere between 40 and 60 seems optimal.

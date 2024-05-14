@@ -27,17 +27,17 @@ public final class InsertionSort {
      * Sortiert das int-Array aufsteigend. Zur Anwendung kommt der
      * Sortieralgorithmus "direktes Einfügen".
      *
-     * @param array Interger-Array.
+     * @param array Integer-Array.
      * @param min   der Index des ersten zu sortierenden Elements
      *              (einschliesslich).
-     * @param max   der Index des letzten exklusiven Elements, das sortiert werden
+     * @param max   der Index des letzten inklusiven Elements, das sortiert werden
      *              soll.
      */
     public static void exec(final int[] array, final int min, final int max) {
         int elt;
         int j;
 
-        for (int i = min; i < max; i++) {
+        for (int i = min; i <= max; i++) {
             elt = array[i];      // next elt for insert
             j = i;               // array[min]..array[j-1] already sorted
             while ((j > min) && (array[j - 1] > elt)) {
