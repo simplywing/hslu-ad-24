@@ -17,11 +17,12 @@
 <configuration scan="true" scanPeriod="30 seconds">
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%white%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{20}) - %msg %n</pattern>
+            <pattern>%white%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{20}) - %msg %n
+            </pattern>
         </encoder>
     </appender>
     <root level="INFO">
-        <appender-ref ref="Console" />
+        <appender-ref ref="Console"/>
     </root>
 </configuration>
 
