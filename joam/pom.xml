@@ -262,6 +262,12 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+            <scope>compile</scope>
+        </dependency>
         <!--        <dependency>-->
         <!--            <groupId>ch.hslu</groupId>-->
         <!--            <artifactId>oop_maven_template</artifactId>-->
