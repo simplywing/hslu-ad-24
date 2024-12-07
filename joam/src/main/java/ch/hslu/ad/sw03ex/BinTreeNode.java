@@ -18,6 +18,7 @@ public final class BinTreeNode<T extends Comparable<T>> {
     }
 
     public BinTreeNode(T data, BinTreeNode<T> parent) {
+        this.setParent(parent);
         this.setData(data);
     }
 

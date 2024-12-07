@@ -24,8 +24,8 @@ class MyListTest {
         list.add(new Point(3, 3));
         list.add(new Point(4, 4));
 
-        assertEquals(2, list.get(1).getX());
-        assertEquals(3, list.get(2).getX());
+        assertEquals(2, list.get(1).x());
+        assertEquals(3, list.get(2).x());
     }
 
     @Test

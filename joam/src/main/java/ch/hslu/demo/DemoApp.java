@@ -18,6 +18,9 @@ package ch.hslu.demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Demo-Applikation für {@link ch.hslu.demo.Point}-Klasse.
  */
@@ -25,10 +28,14 @@ public final class DemoApp {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoApp.class);
 
-    /** X-Wert. Beispiel. */
+    /**
+     * X-Wert. Beispiel.
+     */
     private static final int COR_X = 2;
 
-    /** Y-Wert. Beispiel. */
+    /**
+     * Y-Wert. Beispiel.
+     */
     private static final int COR_Y = -1;
 
     /**
@@ -39,6 +46,7 @@ public final class DemoApp {
 
     /**
      * Main-Methode.
+     *
      * @param args Startargumente.
      */
     public static void main(final String[] args) {

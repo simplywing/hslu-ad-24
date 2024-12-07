@@ -67,7 +67,7 @@ public final class SpeedCount {
      *
      * @param args not used.
      */
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
         final int passes = 10;
         final int threads = 20;
         final int counts = 100_000;

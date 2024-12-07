@@ -34,7 +34,7 @@ final class PointTest {
      */
     @Test
     void testGetX() {
-        assertEquals(10, new Point(10, 0).getX());
+        assertEquals(10, new Point(10, 0).x());
     }
 
     /**
@@ -42,7 +42,7 @@ final class PointTest {
      */
     @Test
     void testGetY() {
-        assertEquals(20, new Point(0, 20).getY());
+        assertEquals(20, new Point(0, 20).y());
     }
 
     /**

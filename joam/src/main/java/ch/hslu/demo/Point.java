@@ -15,13 +15,13 @@
  */
 package ch.hslu.demo;
 
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Modell eines Punktes im 2D-Raum.
  * Klasse ist Immutable implementiert.
  */
-public final class Point {
+public record Point(int x, int y) implements Comparable<Point> {
 
     /**
      * Punkt keinem Quadrant zugeordnet.
@@ -48,23 +48,20 @@ public final class Point {
      */
     private static final int QUADRANT_4 = 4;
 
-    private final int x;
-    private final int y;
-
     /**
      * Konstruktor für Punkt mit Koordinaten.
+     *
      * @param x x-Koordinate.
      * @param y y-Koordinate.
      */
-    public Point(final int x, final int y) {
-        this.x = x;
-        this.y = y;
+    public Point {
     }
 
     /**
      * Liefert den Quadranten in welchem der Punkt liegt.
      * Liegen die Koordinaten auf den Achsen oder
      * auf dem Nullpunkt, liefert die Funktion den Wert 0 zurück.
+     *
      * @return Nummer des Quadranten.
      */
     public int getQuadrant() {
@@ -89,17 +86,21 @@ public final class Point {
 
     /**
      * Liefert x-Koordinate zurück.
+     *
      * @return x-Koordinate des Punktes.
      */
-    public int getX() {
+    @Override
+    public int x() {
         return this.x;
     }
 
     /**
      * Liefert y-Koordinate zurück.
+     *
      * @return y-Koordinate des Punktes.
      */
-    public int getY() {
+    @Override
+    public int y() {
         return this.y;
     }
 
@@ -113,15 +114,6 @@ public final class Point {
     }
 
     /**
-     * Liefert Hashcode auf Basis von x- und y-Koordinate.
-     * {@inheritDoc}.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.x, this.y);
-    }
-
-    /**
      * Liefert eine String-Repräsentation des Punktes.
      * {@inheritDoc}.
      */
@@ -130,4 +122,11 @@ public final class Point {
         return String.format("Point[x=%d,y=%d]", this.x, this.y);
     }
 
+    @Override
+    public int compareTo(@NotNull Point o) {
+        if (this == o) {
+            return 0;
+        }
+        return Integer.compare(this.x, o.x);
+    }
 }
